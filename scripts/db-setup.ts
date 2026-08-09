@@ -1,16 +1,19 @@
 /**
  * scripts/db-setup.ts
  *
- * Creates the database tables required for Nischal Legal Office Phase 2.
+ * Creates the database tables required for Nischal Legal Office.
  * Run with: npm run db:setup
  *
  * Tables created (IF NOT EXISTS):
- *   site_content  — stores the full site content as JSONB (single row, id=1)
- *   messages      — stores contact form submissions (Phase 3)
+ *   site_content          — stores the full site content as JSONB (single row, id=1)
+ *   messages              — stores contact form submissions
+ *   admin_users           — stores admin user authentication & lock state
+ *   site_content_backups  — stores content history backups
  */
 
 import * as dotenv from "dotenv";
 import { resolve } from "path";
+import bcrypt from "bcryptjs";
 
 // Load .env.local from the project root
 dotenv.config({ path: resolve(process.cwd(), ".env.local") });
@@ -52,7 +55,49 @@ async function setup() {
   `;
   console.log("[db:setup] ✓ Table messages ready");
 
-  console.log("[db:setup] Done — both tables exist.");
+  await sql`
+    CREATE TABLE IF NOT EXISTS admin_users (
+      id              SERIAL PRIMARY KEY,
+      username        TEXT UNIQUE NOT NULL,
+      password_hash   TEXT NOT NULL,
+      must_change     BOOLEAN NOT NULL DEFAULT true,
+      failed_attempts INT NOT NULL DEFAULT 0,
+      locked_until    TIMESTAMPTZ,
+      updated_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  console.log("[db:setup] ✓ Table admin_users ready");
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS site_content_backups (
+      id          SERIAL PRIMARY KEY,
+      data        JSONB NOT NULL,
+      created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  console.log("[db:setup] ✓ Table site_content_backups ready");
+
+  // Check if admin_users is empty, if so insert default admin
+  const existingAdmins = await sql`SELECT id FROM admin_users LIMIT 1`;
+  if (existingAdmins.length === 0) {
+    const defaultUsername = "admin";
+    const defaultPassword = "nischal2026";
+    const passwordHash = await bcrypt.hash(defaultPassword, 10);
+
+    await sql`
+      INSERT INTO admin_users (username, password_hash, must_change, failed_attempts, updated_at)
+      VALUES (${defaultUsername}, ${passwordHash}, true, 0, now())
+    `;
+    console.log("--------------------------------------------------");
+    console.log("[db:setup] Created initial admin credentials:");
+    console.log(`  Username: ${defaultUsername}`);
+    console.log(`  Password: ${defaultPassword}`);
+    console.log("--------------------------------------------------");
+  } else {
+    console.log("[db:setup] admin_users already contains users; skipping initial seed.");
+  }
+
+  console.log("[db:setup] Done — all tables and initial admin ready.");
 }
 
 setup().catch((err) => {
