@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "db:setup": "tsx scripts/db-setup.ts",
-    "db:seed": "tsx scripts/db-seed.ts"
+    "db:seed": "tsx scripts/db-seed.ts",
+    "db:merge": "tsx scripts/db-merge-keys.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

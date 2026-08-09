@@ -3,9 +3,14 @@ import Image from "next/image";
 import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd } from "@/lib/lang";
 import { telHref, waHref } from "@/lib/phone";
+import { submitContactFormAction } from "./actions";
 
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
+
+interface ContactPageProps {
+  searchParams: Promise<{ sent?: string; err?: string }>;
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -13,16 +18,36 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${t(seed.contact.heading, lang)} — ${t(seed.settings.siteName, lang)}`,
     description: t(seed.contact.intro, lang),
+    alternates: {
+      canonical: "/contact",
+      languages: {
+        ne: "/contact?lang=ne",
+        en: "/contact?lang=en",
+        "x-default": "/contact",
+      },
+    },
   };
 }
 
-export default async function ContactPage() {
+export default async function ContactPage({ searchParams }: ContactPageProps) {
   const lang = await getLang();
   const seed = await getContent();
+  const { sent, err } = await searchParams;
   const { settings, ui, contact, gallery } = seed;
 
   const phoneDisplay = nd(settings.phone, lang);
   const mobileDisplay = nd(settings.mobile, lang);
+
+  const formNameLabel = ui.form_name ? t(ui.form_name, lang) : (lang === "ne" ? "नाम" : "Name");
+  const formPhoneLabel = ui.form_phone ? t(ui.form_phone, lang) : (lang === "ne" ? "फोन / मोबाइल" : "Phone");
+  const formMessageLabel = ui.form_message ? t(ui.form_message, lang) : (lang === "ne" ? "सन्देश" : "Message");
+  const formSendLabel = ui.form_send ? t(ui.form_send, lang) : (lang === "ne" ? "सन्देश पठाउनुहोस्" : "Send message");
+  const formSuccessMsg = ui.form_success
+    ? t(ui.form_success, lang)
+    : (lang === "ne" ? "तपाईंको सन्देश प्राप्त भयो । धन्यवाद !" : "Your message has been received. Thank you!");
+  const formErrorMsg = ui.form_error
+    ? t(ui.form_error, lang)
+    : (lang === "ne" ? "माफ गर्नुहोस्, सन्देश पठाउन सकिएन । फेरि प्रयास गर्नुहोस् ।" : "Sorry, the message could not be sent. Please try again.");
 
   return (
     <>
@@ -137,6 +162,96 @@ export default async function ContactPage() {
               >
                 {t(ui.open_map, lang)} ↗
               </a>
+            </div>
+          </div>
+
+          {/* ── PUBLIC CONTACT FORM ────────────────────────────────────────── */}
+          <div className="contact-form-wrap">
+            <div className="contact-form-card">
+              <h2 className="lockup__heading" style={{ fontSize: "1.375rem", marginBottom: "8px" }}>
+                {formSendLabel}
+              </h2>
+              {contact.formIntro && (
+                <p className="contact-form-intro">{t(contact.formIntro, lang)}</p>
+              )}
+
+              {sent === "1" && (
+                <div className="form-banner form-banner--success" role="status">
+                  <span>✓ {formSuccessMsg}</span>
+                </div>
+              )}
+
+              {err === "1" && (
+                <div className="form-banner form-banner--error" role="alert">
+                  <span>⚠ {formErrorMsg}</span>
+                </div>
+              )}
+
+              <form action={submitContactFormAction}>
+                {/* Honeypot field (hidden from genuine users) */}
+                <div style={{ display: "none" }} aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                {/* Timing field */}
+                <input type="hidden" name="_t" value={Date.now()} />
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="form-name">
+                    {formNameLabel} <span style={{ color: "var(--red)" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="form-name"
+                    name="name"
+                    required
+                    maxLength={100}
+                    className="form-input"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="form-phone">
+                    {formPhoneLabel} <span style={{ color: "var(--red)" }}>*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="form-phone"
+                    name="phone"
+                    required
+                    maxLength={30}
+                    className="form-input"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="form-message">
+                    {formMessageLabel} <span style={{ color: "var(--red)" }}>*</span>
+                  </label>
+                  <textarea
+                    id="form-message"
+                    name="message"
+                    required
+                    maxLength={2000}
+                    className="form-textarea"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  id="contact-form-submit-btn"
+                >
+                  {formSendLabel}
+                </button>
+              </form>
             </div>
           </div>
         </div>

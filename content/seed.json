@@ -43,7 +43,13 @@
     "landmark_label": { "ne": "कसरी पुग्ने", "en": "How to find us" },
     "payment_label": { "ne": "भुक्तानी", "en": "Payment" },
     "open_map": { "ne": "गुगल नक्सामा खोल्नुहोस्", "en": "Open in Google Maps" },
-    "credit": { "ne": "वेबसाइट", "en": "Website" }
+    "credit": { "ne": "वेबसाइट", "en": "Website" },
+    "form_name": { "ne": "नाम", "en": "Name" },
+    "form_phone": { "ne": "फोन / मोबाइल", "en": "Phone" },
+    "form_message": { "ne": "सन्देश", "en": "Message" },
+    "form_send": { "ne": "सन्देश पठाउनुहोस्", "en": "Send message" },
+    "form_success": { "ne": "तपाईंको सन्देश प्राप्त भयो । धन्यवाद !", "en": "Your message has been received. Thank you!" },
+    "form_error": { "ne": "माफ गर्नुहोस्, सन्देश पठाउन सकिएन । फेरि प्रयास गर्नुहोस् ।", "en": "Sorry, the message could not be sent. Please try again." }
   },
 
   "hero": {

@@ -15,6 +15,7 @@ const SECTIONS = [
   { href: "/admin/messages", labelNe: "ग्राहक सन्देशहरू", labelEn: "Messages Inbox", desc: "सम्पर्क फारमबाट आएका सन्देशहरूको सूची" },
   { href: "/admin/advanced", labelNe: "उन्नत / ब्याकअप", labelEn: "Advanced / Backups", desc: "कच्चा JSON सम्पादन र पहिलेका ब्याकअप रिस्टोर" },
   { href: "/admin/password", labelNe: "पासवर्ड परिवर्तन", labelEn: "Change Password", desc: "व्यवस्थापक पासवर्ड परिवर्तन गर्नुहोस्" },
+  { href: "/admin/guide", labelNe: "प्रयोग गाइड", labelEn: "User Guide", desc: "वेबसाइट चलाउने र सम्पादन गर्ने सरल नेपाली गाइड" },
 ];
 
 export default async function AdminDashboardPage() {

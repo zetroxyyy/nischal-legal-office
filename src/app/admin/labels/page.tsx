@@ -177,6 +177,61 @@ export default async function AdminLabelsPage({ searchParams }: PageProps) {
           />
         </div>
 
+        {/* Contact Form Labels */}
+        <div className="admin-card">
+          <h2 className="admin-card__title">सम्पर्क फारमका शब्दहरू (Contact Form Labels)</h2>
+          <BilingualField
+            labelNe="नाम फिल्ड लेबुल"
+            labelEn="Name Field Label"
+            namePrefix="form_name"
+            valueNe={ui.form_name?.ne ?? "नाम"}
+            valueEn={ui.form_name?.en ?? "Name"}
+            required
+          />
+          <BilingualField
+            labelNe="फोन फिल्ड लेबुल"
+            labelEn="Phone Field Label"
+            namePrefix="form_phone"
+            valueNe={ui.form_phone?.ne ?? "फोन / मोबाइल"}
+            valueEn={ui.form_phone?.en ?? "Phone"}
+            required
+          />
+          <BilingualField
+            labelNe="सन्देश फिल्ड लेबुल"
+            labelEn="Message Field Label"
+            namePrefix="form_message"
+            valueNe={ui.form_message?.ne ?? "सन्देश"}
+            valueEn={ui.form_message?.en ?? "Message"}
+            required
+          />
+          <BilingualField
+            labelNe="पठाउनुहोस् बटन लेबुल"
+            labelEn="Send Button Label"
+            namePrefix="form_send"
+            valueNe={ui.form_send?.ne ?? "सन्देश पठाउनुहोस्"}
+            valueEn={ui.form_send?.en ?? "Send message"}
+            required
+          />
+          <BilingualField
+            labelNe="सफलता सन्देश (Success Notice)"
+            labelEn="Success Message"
+            namePrefix="form_success"
+            valueNe={ui.form_success?.ne ?? "तपाईंको सन्देश प्राप्त भयो । धन्यवाद !"}
+            valueEn={ui.form_success?.en ?? "Your message has been received. Thank you!"}
+            isTextarea
+            required
+          />
+          <BilingualField
+            labelNe="त्रुटि सन्देश (Error Notice)"
+            labelEn="Error Message"
+            namePrefix="form_error"
+            valueNe={ui.form_error?.ne ?? "माफ गर्नुहोस्, सन्देश पठाउन सकिएन । फेरि प्रयास गर्नुहोस् ।"}
+            valueEn={ui.form_error?.en ?? "Sorry, the message could not be sent. Please try again."}
+            isTextarea
+            required
+          />
+        </div>
+
         <div className="admin-btn-group">
           <button type="submit" className="admin-btn admin-btn--primary">
             सबै सेभ गर्नुहोस् (Save UI Labels)

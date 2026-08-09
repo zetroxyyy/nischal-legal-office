@@ -11,6 +11,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${t(seed.services.heading, lang)} — ${t(seed.settings.siteName, lang)}`,
     description: t(seed.services.intro, lang),
+    alternates: {
+      canonical: "/services",
+      languages: {
+        ne: "/services?lang=ne",
+        en: "/services?lang=en",
+        "x-default": "/services",
+      },
+    },
   };
 }
 

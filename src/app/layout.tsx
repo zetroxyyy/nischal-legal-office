@@ -3,7 +3,7 @@ import { Noto_Serif_Devanagari, Mukta } from "next/font/google";
 import "./globals.css";
 import { getContent } from "@/lib/content";
 import { getLang, t, nd } from "@/lib/lang";
-import { telHref } from "@/lib/phone";
+import { telHref, phoneE164 } from "@/lib/phone";
 
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
@@ -26,14 +26,26 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
   const seed = await getContent();
   const { settings } = seed;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nischal-legal-office.vercel.app";
+
   return {
+    metadataBase: new URL(siteUrl),
     title: t(settings.seo.title, lang),
     description: t(settings.seo.desc, lang),
+    alternates: {
+      canonical: "/",
+      languages: {
+        ne: "/?lang=ne",
+        en: "/?lang=en",
+        "x-default": "/",
+      },
+    },
     openGraph: {
       title: t(settings.seo.title, lang),
       description: t(settings.seo.desc, lang),
       images: [settings.seo.ogImage],
       type: "website",
+      url: siteUrl,
     },
   };
 }
@@ -50,6 +62,55 @@ export default async function RootLayout({
   const phoneDisplay = nd(settings.phone, lang);
   const mobileDisplay = nd(settings.mobile, lang);
   const currentYear = nd(String(new Date().getFullYear()), lang);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nischal-legal-office.vercel.app";
+  const ogImageUrl = settings.seo.ogImage.startsWith("http")
+    ? settings.seo.ogImage
+    : `${siteUrl}${settings.seo.ogImage}`;
+
+  // If office hours change again, update this line — it is not driven by the admin.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    name: "निश्चल कानूनी कार्यालय",
+    alternateName: "Nischal Legal Office — Office of Nepal Notary Public",
+    url: siteUrl,
+    image: ogImageUrl,
+    telephone: phoneE164(settings.mobile),
+    email: settings.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Lionschowk, Kshetrapur Highway",
+      addressLocality: "Bharatpur",
+      postalCode: "44207",
+      addressRegion: "Bagmati Province",
+      addressCountry: "NP",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 27.6935327,
+      longitude: 84.4274409,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+        ],
+        opens: "09:00",
+        closes: "17:00",
+      },
+    ],
+    founder: {
+      "@type": "Person",
+      name: "Hari Bdr. Mainali",
+      jobTitle: "Advocate, Notary Public",
+    },
+  };
 
   return (
     <html lang={lang} className={`${notoSerifDev.variable} ${mukta.variable}`}>
@@ -59,6 +120,10 @@ export default async function RootLayout({
         <meta name="theme-color" content="#FBF9F4" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         {/* Top strip */}
@@ -106,11 +171,12 @@ export default async function RootLayout({
           <input type="checkbox" id="hamburger" className="hamburger-check" aria-hidden="true" />
           <div className="container">
             <div className="site-header__inner">
-              <a href="/" className="wordmark" aria-label={t(settings.siteName, lang)}>
+              <a href="/" className="wordmark">
                 <span className="wordmark__name">{t(settings.siteName, lang)}</span>
                 <span className="wordmark__sub">{t(settings.siteSub, lang)}</span>
               </a>
-              <label htmlFor="hamburger" className="hamburger-label" aria-label="मेनु">
+              <label htmlFor="hamburger" className="hamburger-label">
+                <span className="sr-only">मेनु खोल्नुहोस्</span>
                 <span></span>
                 <span></span>
                 <span></span>
