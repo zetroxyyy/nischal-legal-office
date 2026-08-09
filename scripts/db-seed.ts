@@ -1,10 +1,12 @@
 /**
  * scripts/db-seed.ts
  *
- * Reads content/seed.json and upserts it into site_content id=1.
+ * Reads content/seed.json and writes it into site_content id=1.
  * Run with: npm run db:seed
+ * Force overwrite: npm run db:seed -- --force
  *
- * Safe to run multiple times — uses INSERT ... ON CONFLICT ... DO UPDATE.
+ * Guarded: If row 1 already exists, refuses to overwrite without --force.
+ * When --force is supplied, creates a backup in site_content_backups before overwriting.
  */
 
 import * as dotenv from "dotenv";
@@ -27,6 +29,29 @@ if (!dbUrl) {
 const sql = neon(dbUrl);
 
 async function seed() {
+  const isForce = process.argv.includes("--force");
+
+  // Check if row 1 already exists
+  const existing = (await sql`
+    SELECT data FROM site_content WHERE id = 1 LIMIT 1
+  `) as Record<string, any>[];
+
+  if (existing.length > 0 && !isForce) {
+    console.error(
+      "site_content already has data — refusing to overwrite. Run with --force to overwrite (THIS DESTROYS ALL CLIENT EDITS)."
+    );
+    process.exit(1);
+  }
+
+  if (existing.length > 0 && isForce) {
+    console.log("[db:seed] --force specified. Backing up existing content into site_content_backups …");
+    await sql`
+      INSERT INTO site_content_backups (data, created_at)
+      VALUES (${JSON.stringify(existing[0].data)}::jsonb, now())
+    `;
+    console.log("[db:seed] ✓ Backup created successfully.");
+  }
+
   console.log("[db:seed] Reading content/seed.json …");
 
   const seedPath = resolve(process.cwd(), "content", "seed.json");
@@ -36,7 +61,7 @@ async function seed() {
   const topLevelKeys = Object.keys(data);
   console.log("[db:seed] Top-level keys:", topLevelKeys.join(", "));
 
-  console.log("[db:seed] Upserting into site_content id=1 …");
+  console.log("[db:seed] Writing into site_content id=1 …");
   await sql`
     INSERT INTO site_content (id, data, updated_at)
     VALUES (1, ${JSON.stringify(data)}::jsonb, now())
