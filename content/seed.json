@@ -1,0 +1,224 @@
+{
+  "settings": {
+    "siteName": { "ne": "निश्चल कानूनी कार्यालय", "en": "Nischal Legal Office" },
+    "siteSub": { "ne": "आधिकारिक नोटरी पब्लिकको कार्यालय", "en": "Office of Nepal Notary Public" },
+    "phone": "056-493487",
+    "mobile": "9855054592",
+    "whatsapp": "9779855054592",
+    "email": "nischallegalservice@gmail.com",
+    "esewa": { "ne": "eSewa: ९८५५०५४५९२ (Nischal Legal Service)", "en": "eSewa: 9855054592 (Nischal Legal Service)" },
+    "address": { "ne": "लायन्सचोक, क्षेत्रपुर हाइवे, भरतपुर, चितवन", "en": "Lionschowk, Kshetrapur Highway, Bharatpur 44207, Chitwan, Nepal" },
+    "landmark": { "ne": "नारायणगढ लायन्सचोकबाट नमस्ते चोक हुँदै क्षेत्रपुर हाइवेतर्फ करिब ३०० मिटर अगाडि, एपेक्स कलेज नजिक", "en": "About 300 m from Lionschowk (Narayangarh) via Namaste Chowk towards Kshetrapur Highway, near Apex College" },
+    "hours": { "ne": "आइतबार–शुक्रबार, बिहान ९:३० – दिउँसो ५:०० (शनिबार बिदा)", "en": "Sunday–Friday, 9:30 AM – 5:00 PM (closed Saturdays)" },
+    "plusCode": "MCVH+C68, Bharatpur 44207",
+    "mapLink": "https://maps.app.goo.gl/W88TxC84isbgHhwp6",
+    "mapEmbed": "https://www.google.com/maps?q=27.6935327,84.4274409&z=17&output=embed",
+    "announce": {
+      "show": true,
+      "ne": "कानुनी परामर्श निःशुल्क छ — कानून र नियम पालना गरी जरिवाना र तनावबाट बचौं ।",
+      "en": "Legal consultation is free — follow the law and rules, avoid fines and stress."
+    },
+    "footerNote": { "ne": "कागजातको आधिकारिक अनुवाद, नोटरी सेवा तथा कानुनी परामर्शका लागि भरपर्दो कार्यालय ।", "en": "A dependable office for authorised document translation, notary service and legal counsel." },
+    "seo": {
+      "title": { "ne": "निश्चल कानूनी कार्यालय — नोटरी पब्लिक, अनुवाद तथा कानुनी सेवा, भरतपुर", "en": "Nischal Legal Office — Notary Public, Translation & Legal Services, Bharatpur" },
+      "desc": { "ne": "अधिवक्ता हरि ब. मैनाली (एल.एल.एम.) — नोटरी प्रमाणित अनुवाद (नेपाली ⇄ English), दर्ता विवाह, सम्बन्ध विच्छेद, कम्पनी दर्ता, सम्झौता–करारनामा तथा कानुनी परामर्श । लायन्सचोक, क्षेत्रपुर हाइवे, भरतपुर, चितवन ।", "en": "Advocate Hari Bdr. Mainali (LLM) — notarised translation (Nepali ⇄ English), court marriage, divorce, company registration, agreements and legal counsel. Lionschowk, Kshetrapur Highway, Bharatpur, Chitwan." },
+      "ogImage": "/images/office-front.jpg"
+    }
+  },
+
+  "ui": {
+    "nav_home": { "ne": "गृहपृष्ठ", "en": "Home" },
+    "nav_services": { "ne": "सेवा तथा प्रक्रिया", "en": "Services & Procedure" },
+    "nav_contact": { "ne": "सम्पर्क", "en": "Contact" },
+    "call": { "ne": "फोन गर्नुहोस्", "en": "Call" },
+    "whatsapp": { "ne": "ह्वाट्सएप", "en": "WhatsApp" },
+    "directions": { "ne": "बाटो हेर्नुहोस्", "en": "Get directions" },
+    "all_services": { "ne": "सबै सेवा र प्रक्रिया हेर्नुहोस्", "en": "View all services & procedure" },
+    "more_photos": { "ne": "थप तस्बिरहरू", "en": "More photos" },
+    "phone_label": { "ne": "फोन", "en": "Phone" },
+    "mobile_label": { "ne": "मोबाइल", "en": "Mobile" },
+    "email_label": { "ne": "इमेल", "en": "Email" },
+    "hours_label": { "ne": "कार्यालय समय", "en": "Office hours" },
+    "address_label": { "ne": "ठेगाना", "en": "Address" },
+    "landmark_label": { "ne": "कसरी पुग्ने", "en": "How to find us" },
+    "payment_label": { "ne": "भुक्तानी", "en": "Payment" },
+    "open_map": { "ne": "गुगल नक्सामा खोल्नुहोस्", "en": "Open in Google Maps" },
+    "credit": { "ne": "वेबसाइट", "en": "Website" }
+  },
+
+  "hero": {
+    "kicker": { "ne": "अधिवक्ता · नोटरी पब्लिक · मध्यस्थकर्ता", "en": "Advocate · Notary Public · Mediator" },
+    "title": { "ne": "निश्चल कानूनी कार्यालय", "en": "Nischal Legal Office" },
+    "subtitle": { "ne": "कानुनी सेवा, नोटरी पब्लिक तथा आधिकारिक अनुवाद (नेपाली ⇄ English) — लायन्सचोक–क्षेत्रपुर हाइवे, नारायणगढ, भरतपुर, चितवन ।", "en": "Legal services, notary public and authorised translation (Nepali ⇄ English) — Lionschowk–Kshetrapur Highway, Narayangarh, Bharatpur, Chitwan." },
+    "points": [
+      { "ne": "हरि ब. मैनाली (एल.एल.एम.) — अधिवक्ता तथा नोटरी पब्लिक", "en": "Hari Bdr. Mainali (LLM) — Advocate & Notary Public" },
+      { "ne": "आधिकारिक मान्यताप्राप्त अनुवादक: नेपाली ⇄ English", "en": "Authorised translator: Nepali ⇄ English" },
+      { "ne": "कानुनी परामर्श निःशुल्क छ", "en": "Legal consultation is free" }
+    ],
+    "image": "/images/office-front-hero.jpg",
+    "imageCaption": { "ne": "कार्यालय भवन — लायन्सचोक, क्षेत्रपुर हाइवे, भरतपुर", "en": "Office building — Lionschowk, Kshetrapur Highway, Bharatpur" }
+  },
+
+  "services": {
+    "heading": { "ne": "सेवाहरू", "en": "Services" },
+    "intro": { "ne": "निश्चल कानूनी कार्यालयबाट उपलब्ध हुने मुख्य सेवाहरू यसप्रकार छन् । कुनै पनि सेवाका लागि सक्कल कागजातसहित कार्यालयमा सम्पर्क गर्नुहोस् ।", "en": "The main services available at Nischal Legal Office are listed below. For any service, please contact the office with your original documents." },
+    "items": [
+      {
+        "title": { "ne": "नोटरी प्रमाणित अनुवाद (नेपाली ⇄ English)", "en": "Notarised translation (Nepali ⇄ English)" },
+        "desc": { "ne": "शैक्षिक, अदालती, कम्पनी लगायतका कागजातहरूको आधिकारिक अनुवाद, नोटरी प्रमाणीकरण तथा कागजात प्रमाणित (Attestation) र भेरिफिकेसन सेवा ।", "en": "Official translation of academic, court, company and other documents, with notary certification, attestation and document verification." }
+      },
+      {
+        "title": { "ne": "अदालती / दर्ता विवाह (Court Marriage)", "en": "Court marriage" },
+        "desc": { "ne": "दर्ता विवाहसम्बन्धी सम्पूर्ण कागजात तयारी र प्रक्रियामा सहयोग ।", "en": "Complete document preparation and assistance with the registered (court) marriage process." }
+      },
+      {
+        "title": { "ne": "सम्बन्ध विच्छेद (Divorce)", "en": "Divorce" },
+        "desc": { "ne": "सम्बन्ध विच्छेदसम्बन्धी कानुनी परामर्श, कागजात तयारी तथा मुद्दा दर्ता प्रक्रियामा सहयोग ।", "en": "Legal counsel, documentation and filing assistance for divorce cases." }
+      },
+      {
+        "title": { "ne": "मुद्दा मामिला तथा कानुनी परामर्श", "en": "Court cases & legal counsel" },
+        "desc": { "ne": "देवानी, फौजदारी तथा कम्पनीसम्बन्धी मुद्दाहरूमा सबै तहका अदालतमा हुने कार्यहरू र शुद्ध कानुनी परामर्श ।", "en": "Civil, criminal and company cases at courts of all levels, national and international, with clear legal advice." }
+      },
+      {
+        "title": { "ne": "कम्पनी दर्ता तथा कम्पनीसम्बन्धी सम्पूर्ण काम", "en": "Company registration & all company work" },
+        "desc": { "ne": "कम्पनी दर्ता, खारेज, प्रबन्धपत्र (MA), नियमावली (AA), नामसारी, बिक्रीनामा, शेयर लगत/बिक्री, पुँजी वृद्धि, ठाउँसारी, नाम संशोधन, अध्यावधिक, उद्योग दर्ता, नविकरण लगायत ।", "en": "Registration and closure, MoA (MA), AoA (AA), name transfer, sale deeds, share records and transfer, capital increase, address change, name amendment, updates, industry registration and renewals." }
+      },
+      {
+        "title": { "ne": "प्यान, भ्याट, कर तथा अडिट परामर्श", "en": "PAN, VAT, tax & audit consultation" },
+        "desc": { "ne": "प्यान/भ्याट दर्ता तथा कर र अडिटसम्बन्धी परामर्श सेवा ।", "en": "PAN/VAT registration and consultation on tax and audit matters." }
+      },
+      {
+        "title": { "ne": "सम्झौता / करारनामा लेखन", "en": "Agreements & contracts" },
+        "desc": { "ne": "घर, जग्गा, व्यवसाय तथा सवारी भाडा लगायतका सम्झौता–करारनामाको लेखन र प्रमाणीकरण ।", "en": "Drafting and certification of house, land, business and vehicle rental agreements and other contracts." }
+      },
+      {
+        "title": { "ne": "अधिकृत वारेसनामा (Power of Attorney)", "en": "Power of attorney" },
+        "desc": { "ne": "जग्गा बिक्री, सम्बन्ध विच्छेद, मुद्दा दर्ता आदि प्रयोजनका लागि अधिकृत वारेसनामाको तयारी ।", "en": "Preparation of authorised power of attorney for land sale, divorce, case filing and similar purposes." }
+      },
+      {
+        "title": { "ne": "मध्यस्थता (Mediation)", "en": "Mediation" },
+        "desc": { "ne": "विवाद समाधानका लागि मध्यस्थता सेवा ।", "en": "Mediation service for dispute resolution." }
+      }
+    ]
+  },
+
+  "docs": {
+    "heading": { "ne": "सम्झौता/करारनामाका लागि आवश्यक कागजातहरू", "en": "Documents required for agreements" },
+    "intro": { "ne": "सम्झौता वा करारनामाको कागज गर्दा तलका कागजातहरू आवश्यक पर्छन् । सक्कल कागजात लिएर आउनुहोस् ।", "en": "The following documents are required when preparing an agreement or contract. Please bring the originals." },
+    "groups": [
+      {
+        "title": { "ne": "घर भाडा", "en": "House rent" },
+        "items": [
+          { "ne": "घरधनीको नागरिकता र घरधनी स्वयं", "en": "House owner's citizenship, with the owner present" },
+          { "ne": "भाडामा बस्नेको नागरिकता र भाडावाला स्वयं", "en": "Tenant's citizenship, with the tenant present" },
+          { "ne": "व्यवसाय भएमा प्यान, छाप र प्रतिनिधि", "en": "If a business: PAN, company stamp and representative" },
+          { "ne": "घर रहेको कित्ताको लालपुर्जा", "en": "Land-ownership certificate (lalpurja) of the plot" },
+          { "ne": "घर भाडाको महिनावारी रकम र वार्षिक रकम", "en": "Monthly and yearly rent amount" },
+          { "ne": "भाडामा लगाउने मिति: कहिलेदेखि कहिलेसम्म", "en": "Rental period: start and end dates" },
+          { "ne": "२ जना साक्षीको नागरिकता", "en": "Citizenship of two witnesses" },
+          { "ne": "लाइसेन्सवाला लेखक र छाप", "en": "Licensed deed-writer and stamp" },
+          { "ne": "आवश्यक भए पक्षको फोटो र सम्पर्क नं.", "en": "Parties' photos and contact numbers, if required" }
+        ]
+      },
+      {
+        "title": { "ne": "जग्गा भाडा", "en": "Land lease" },
+        "items": [
+          { "ne": "जग्गाधनीको नागरिकता र जग्गाधनी स्वयं", "en": "Landowner's citizenship, with the owner present" },
+          { "ne": "भाडामा बस्नेको नागरिकता र भाडावाला स्वयं", "en": "Lessee's citizenship, with the lessee present" },
+          { "ne": "व्यवसाय भएमा प्यान, छाप र प्रतिनिधि", "en": "If a business: PAN, company stamp and representative" },
+          { "ne": "जग्गा रहेको कित्ताको लालपुर्जा", "en": "Land-ownership certificate (lalpurja) of the plot" },
+          { "ne": "जग्गा भाडाको महिनावारी रकम र वार्षिक रकम", "en": "Monthly and yearly lease amount" },
+          { "ne": "भाडामा लगाउने मिति: कहिलेदेखि कहिलेसम्म", "en": "Lease period: start and end dates" },
+          { "ne": "२ जना साक्षीको नागरिकता", "en": "Citizenship of two witnesses" },
+          { "ne": "लाइसेन्सवाला लेखक र छाप", "en": "Licensed deed-writer and stamp" },
+          { "ne": "आवश्यक भए पक्षको फोटो र सम्पर्क नं.", "en": "Parties' photos and contact numbers, if required" }
+        ]
+      },
+      {
+        "title": { "ne": "साझेदारी व्यवसाय", "en": "Business partnership" },
+        "items": [
+          { "ne": "व्यवसायको प्यान, छाप र व्यवसायी स्वयं", "en": "Business PAN, stamp, and the proprietor present" },
+          { "ne": "व्यवसायमा लगानी गर्नेको नागरिकता र व्यवसायी", "en": "Investor's citizenship, with the businessperson" },
+          { "ne": "व्यवसायमा लगानी गर्ने प्रतिशत", "en": "Each partner's investment percentage" },
+          { "ne": "व्यवसायको नाफा–नोक्सान अडिटको आधारमा", "en": "Profit and loss as per audit" },
+          { "ne": "व्यवसायमा लगाउने मिति: कहिलेदेखि कहिलेसम्म", "en": "Partnership period: start and end dates" },
+          { "ne": "२ जना साक्षीको नागरिकता", "en": "Citizenship of two witnesses" },
+          { "ne": "लाइसेन्सवाला लेखक र छाप", "en": "Licensed deed-writer and stamp" },
+          { "ne": "आवश्यक भए पक्षको फोटो, छाप र सम्पर्क नं.", "en": "Parties' photos, stamp and contact numbers, if required" }
+        ]
+      },
+      {
+        "title": { "ne": "सवारी भाडा", "en": "Vehicle rental" },
+        "items": [
+          { "ne": "सवारी नविकरण भएको बिलबुक र सवारी धनी स्वयं", "en": "Renewed bluebook, with the vehicle owner present" },
+          { "ne": "सवारी भाडामा लिनेको नागरिकता र सवारी भाडावाला", "en": "Hirer's citizenship, with the hirer present" },
+          { "ne": "व्यवसाय भएमा प्यान, छाप र प्रतिनिधि", "en": "If a business: PAN, company stamp and representative" },
+          { "ne": "सवारीको महिनावारी भाडा रकम", "en": "Monthly hire amount of the vehicle" },
+          { "ne": "सवारी भाडाको महिनावारी रकम र वार्षिक रकम", "en": "Monthly and yearly rental amount" },
+          { "ne": "भाडामा लगाउने मिति: कहिलेदेखि कहिलेसम्म", "en": "Rental period: start and end dates" },
+          { "ne": "२ जना साक्षीको नागरिकता", "en": "Citizenship of two witnesses" },
+          { "ne": "लाइसेन्सवाला लेखक र छाप", "en": "Licensed deed-writer and stamp" },
+          { "ne": "आवश्यक भए पक्षको फोटो र सम्पर्क नं.", "en": "Parties' photos and contact numbers, if required" }
+        ]
+      }
+    ],
+    "note": { "ne": "नोट: गलत कागज ल्याई झुक्याएर कुनै कागजात बनाउनु भएमा यसको सम्पूर्ण दायित्व स्वयं व्यक्तिले लिनुपर्नेछ र आफूले ल्याएका सक्कल कागजातहरू आफैँले सुरक्षित राख्नुपर्नेछ । कार्यालय यसको जवाफदेही हुने छैन ।", "en": "Note: if any document is prepared on the basis of false papers, full responsibility lies with the person concerned. Please keep your own original documents safe; the office is not liable for them." }
+  },
+
+  "procedure": {
+    "heading": { "ne": "अनुवाद तथा नोटरी सेवा — अनुरोध", "en": "Translation & notary service — please note" },
+    "intro": { "ne": "सेवा छिटो, शुद्ध र सजिलो बनाउन सेवाग्राहीलाई निम्न अनुरोध गरिन्छ ।", "en": "To keep the service fast, accurate and easy, clients are kindly requested to note the following." },
+    "items": [
+      { "ne": "सम्भव भएसम्म सक्कल (Original) कागजात लिएर सम्बन्धित व्यक्ति स्वयं उपस्थित हुनुहोस् — फोटो वा म्यासेन्जरमा कागजात देखाएर हुँदैन ।", "en": "As far as possible, come in person with the original documents — showing documents by photo or Messenger is not accepted." },
+      { "ne": "कुन–कुन कागजात अनुवाद गर्ने र नोटरीको छाप नेपाली प्रतिलिपिमा लगाउने हो कि होइन, पहिले नै यकिन गर्नुहोस् । राहदानी, बैंक स्टेटमेन्ट लगायतका कागजातको फोटोकपी सबै वा कुन–कुन पेज गर्ने हो सो पनि यकिन गर्नुपर्छ; फोटोकपी सकभर यसै कार्यालयमा गर्नुहोस् ।", "en": "Confirm in advance which documents are to be translated and whether the notary seal goes on the Nepali copy. For passports, bank statements and similar documents, confirm which pages need photocopying — photocopies are best made at this office." },
+      { "ne": "अनुवाद गर्नुपर्ने कागजात र नोटरी मात्र गर्नुपर्ने कागजात छुट्याएर कार्यालयको सम्बन्धित ठाउँमा दिनुहोस् ।", "en": "Separate documents needing translation from those needing notarisation only, and hand them in at the respective counter." },
+      { "ne": "टाइप भइसकेपछि नाम, थर, ठेगाना, अंक, मिति आदि रुजु गर्न रफ प्रति उपलब्ध गराइनेछ — राम्रोसँग जाँची निश्चित भएपछि मात्र फाइनल प्रिन्ट निकालिनेछ ।", "en": "After typing, a rough copy is provided so you can check names, surnames, addresses, numbers and dates — the final print is made only after you have checked and confirmed it." },
+      { "ne": "फाइनल प्रिन्टमा गल्ती भई पुनः सच्याउनु परेमा थप दस्तुर लाग्नेछ ।", "en": "Corrections required after the final print carry an additional fee." },
+      { "ne": "कुनै कागजातमा नाम, थर, ठेगाना, मिति आदि फरक परेमा सम्बन्धित वडा कार्यालय वा जिल्ला प्रशासन कार्यालयबाट एउटै हो भन्ने व्यहोराको प्रमाणित पत्र ल्याउनुपर्नेछ ।", "en": "If names, surnames, addresses or dates differ between documents, a verification letter from the ward office or District Administration Office stating they refer to the same person is required." },
+      { "ne": "धेरै कागजात भएमा रफ प्रति राम्रोसँग जाँचेर भोलिपल्ट फाइनल प्रिन्ट निकाल्दा उत्तम हुन्छ; थोरै कागजात भए सोही दिन पनि सम्भव छ ।", "en": "For many documents, it is best to check the rough copy and take the final print the next day; a small number of documents can be completed the same day." },
+      { "ne": "एकपटक दर्ता गरेपछि ३ महिनासम्म अर्को कागजात बनाउँदा पहिलेको दर्ता नम्बर उल्लेख गर्नुपर्छ — आफ्नो कम्प्युटर नम्बर र दर्ता नम्बर सधैँ ध्यान दिनुहोस् ।", "en": "For further documents within 3 months of registration, quote your earlier registration number — always keep note of your computer number and registration number." },
+      { "ne": "नोटरी पब्लिकबाट प्रमाणित कागजातमा फोटो टाँस्ने, ल्याप्चे/सहीछाप गर्ने वा सरकारी कागजातमा केरमेट–थपघट गर्ने कार्य गैरकानुनी हुन्छ ।", "en": "Pasting photos or adding thumbprints/signatures on notarised documents, or making cuttings and alterations on government documents, is illegal." },
+      { "ne": "फाइनल प्रिन्ट, छोटो/एकल कागजात अनुवाद, फोटोकपी र करारनामा प्रमाणितका लागि लाइनमा बस्नु पर्दैन; तर फाइनल प्रिन्ट निकाल्दा सम्बन्धित व्यक्ति स्वयं उपस्थित हुनुपर्नेछ ।", "en": "No queue is needed for final prints, short single-document translations, photocopies or contract certification; however, the person concerned must be present when the final print is made." }
+    ]
+  },
+
+  "about": {
+    "heading": { "ne": "अधिवक्ताको परिचय", "en": "About the advocate" },
+    "name": { "ne": "हरि बहादुर मैनाली (एल.एल.एम.)", "en": "Hari Bdr. Mainali (LLM)" },
+    "roles": { "ne": "अधिवक्ता · नोटरी पब्लिक · मध्यस्थकर्ता · आधिकारिक मान्यताप्राप्त अनुवादक", "en": "Advocate · Notary Public · Mediator · Authorised Translator" },
+    "body": { "ne": "हरि बहादुर मैनाली (एल.एल.एम.) निश्चल कानूनी कार्यालय तथा नेपाल नोटरी पब्लिकको कार्यालय, भरतपुर सञ्चालन गर्नुहुन्छ । उहाँ अधिवक्ता, नोटरी पब्लिक तथा मध्यस्थकर्ताका रूपमा कार्यरत हुनुहुन्छ र नेपाली–English आधिकारिक अनुवादकका रूपमा मान्यताप्राप्त हुनुहुन्छ ।\n\nदेवानी, फौजदारी तथा कम्पनीसम्बन्धी मुद्दा, कागजातको आधिकारिक अनुवाद र नोटरी प्रमाणीकरण, सम्झौता–करारनामा एवं कम्पनी दर्तासम्बन्धी काममा कार्यालयले सेवाग्राहीलाई सरल र भरपर्दो सेवा दिँदै आएको छ । कानुनी परामर्श निःशुल्क छ ।", "en": "Hari Bdr. Mainali (LLM) runs Nischal Legal Office and the Office of Nepal Notary Public in Bharatpur. He practises as an advocate, notary public and mediator, and is an authorised Nepali–English translator.\n\nThe office provides straightforward, dependable service in civil, criminal and company cases, official document translation and notarisation, agreements and contracts, and company registration work. Legal consultation is free." },
+    "photo": "/images/advocate-hari-mainali.jpg",
+    "tags": [
+      { "ne": "एल.एल.एम.", "en": "LLM" },
+      { "ne": "अधिवक्ता", "en": "Advocate" },
+      { "ne": "नोटरी पब्लिक", "en": "Notary Public" },
+      { "ne": "मध्यस्थकर्ता", "en": "Mediator" },
+      { "ne": "आधिकारिक अनुवादक", "en": "Authorised Translator" }
+    ]
+  },
+
+  "gallery": {
+    "heading": { "ne": "कार्यालय झलक", "en": "Around the office" },
+    "items": [
+      { "image": "/images/office-front.jpg", "caption": { "ne": "कार्यालय भवन, लायन्सचोक–क्षेत्रपुर हाइवे", "en": "Office building, Lionschowk–Kshetrapur Highway" } },
+      { "image": "/images/office-front-parking.jpg", "caption": { "ne": "कार्यालय अगाडिको पार्किङ", "en": "Parking in front of the office" } },
+      { "image": "/images/office-interior.jpg", "caption": { "ne": "कार्यालयको भित्री भाग", "en": "Inside the office" } },
+      { "image": "/images/advocate-at-desk.jpg", "caption": { "ne": "अधिवक्ता हरि ब. मैनाली कार्यकक्षमा", "en": "Advocate Hari Bdr. Mainali at his desk" } },
+      { "image": "/images/signboard-main.jpg", "caption": { "ne": "कार्यालयको मूल बोर्ड", "en": "Main office board" } },
+      { "image": "/images/services-board-2.jpg", "caption": { "ne": "उपलब्ध सेवाहरूको सूचना बोर्ड", "en": "Available-services board" } },
+      { "image": "/images/services-board.jpg", "caption": { "ne": "सेवाहरूको बोर्ड", "en": "Services board" } },
+      { "image": "/images/documents-chart.jpg", "caption": { "ne": "सम्झौताका लागि आवश्यक कागजातको तालिका", "en": "Chart of documents required for agreements" } },
+      { "image": "/images/procedure-notice.jpg", "caption": { "ne": "सेवाग्राहीका लागि अनुरोध–सूचना", "en": "Notice for service seekers" } },
+      { "image": "/images/entrance-signboard.jpg", "caption": { "ne": "सेवा कक्षतर्फको बोर्ड", "en": "Board at the service counter" } },
+      { "image": "/images/office-front-gate.jpg", "caption": { "ne": "मूल गेटबाट देखिने कार्यालय", "en": "The office from the main gate" } },
+      { "image": "/images/location-sketch-map.jpg", "caption": { "ne": "कार्यालयसम्म पुग्ने नक्सा", "en": "Sketch map to the office" } },
+      { "image": "/images/business-card.jpg", "caption": { "ne": "कार्यालयको भिजिटिङ कार्ड", "en": "Office visiting card" } }
+    ]
+  },
+
+  "contact": {
+    "heading": { "ne": "सम्पर्क", "en": "Contact" },
+    "intro": { "ne": "कुनै पनि कानुनी सेवा वा अनुवादका लागि तलका माध्यमबाट सम्पर्क गर्नुहोस्, वा कार्यालय समयभित्र सिधै आउनुहोस् ।", "en": "For any legal service or translation, reach us through the details below, or visit during office hours." },
+    "formIntro": { "ne": "सन्देश पठाउनुहोस् — हामी कार्यालय समयभित्र सम्पर्क गर्नेछौँ ।", "en": "Send a message — we will get back to you during office hours." }
+  }
+}
