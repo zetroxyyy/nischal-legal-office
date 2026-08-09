@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import seed from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd } from "@/lib/lang";
+
+// Allow cookies() (used by getLang) to block prerendering in Next.js 16
+export const instant = false;
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
+  const seed = await getContent();
   return {
     title: `${t(seed.contact.heading, lang)} — ${t(seed.settings.siteName, lang)}`,
     description: t(seed.contact.intro, lang),
@@ -13,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContactPage() {
   const lang = await getLang();
+  const seed = await getContent();
   const { settings, ui, contact, gallery } = seed;
 
   const phoneDisplay = nd(settings.phone, lang);
@@ -44,13 +49,14 @@ export default async function ContactPage() {
                 <div className="contact-dl__row">
                   <dt className="contact-dl__label">{t(ui.phone_label, lang)}</dt>
                   <dd className="contact-dl__value">
-                    <a href={`tel:${settings.phone.replace(/-/g, "")}`}>{phoneDisplay}</a>
+                    {/* International tel: — Part A fix */}
+                    <a href="tel:+97756493487">{phoneDisplay}</a>
                   </dd>
                 </div>
                 <div className="contact-dl__row">
                   <dt className="contact-dl__label">{t(ui.mobile_label, lang)}</dt>
                   <dd className="contact-dl__value">
-                    <a href={`tel:${settings.mobile}`}>{mobileDisplay}</a>
+                    <a href="tel:+9779855054592">{mobileDisplay}</a>
                   </dd>
                 </div>
                 <div className="contact-dl__row">
@@ -91,7 +97,7 @@ export default async function ContactPage() {
 
               <div className="btn-group">
                 <a
-                  href={`tel:${settings.mobile}`}
+                  href="tel:+9779855054592"
                   className="btn btn-primary"
                   id="contact-call-btn"
                 >
@@ -154,7 +160,7 @@ export default async function ContactPage() {
                   height={420}
                   loading="lazy"
                   style={{ width: "100%", height: "240px", objectFit: "cover", display: "block" }}
-                  sizes="(max-width: 760px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 <figcaption
                   style={{

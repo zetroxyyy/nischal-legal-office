@@ -1,10 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Enable Next.js 16 Cache Components ("use cache" directive + cacheTag)
+  cacheComponents: true,
+
   images: {
-    // All images are local, served from /public/images/
-    // No remote domains needed for Phase 1
     formats: ["image/webp", "image/avif"],
+    remotePatterns: [
+      {
+        // Vercel Blob storage for Phase 3+ image uploads
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
+    ],
   },
 };
 

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import seed from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd, formatIndex } from "@/lib/lang";
+
+// Allow cookies() (used by getLang) to block prerendering in Next.js 16
+export const instant = false;
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
+  const seed = await getContent();
   return {
     title: `${t(seed.services.heading, lang)} — ${t(seed.settings.siteName, lang)}`,
     description: t(seed.services.intro, lang),
@@ -12,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ServicesPage() {
   const lang = await getLang();
+  const seed = await getContent();
   const { services, docs, procedure } = seed;
 
   return (

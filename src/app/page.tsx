@@ -1,13 +1,16 @@
 import Image from "next/image";
-import seed from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd, formatIndex } from "@/lib/lang";
+
+// Allow cookies() (used by getLang) to block prerendering in Next.js 16
+export const instant = false;
 
 export default async function HomePage() {
   const lang = await getLang();
+  const seed = await getContent();
   const { settings, ui, hero, services, about, gallery, contact } = seed;
 
   const phoneDisplay = nd(settings.phone, lang);
-  const mobileDisplay = nd(settings.mobile, lang);
 
   const aboutBody = t(about.body, lang)
     .split("\n\n")
@@ -32,8 +35,9 @@ export default async function HomePage() {
                 ))}
               </ul>
               <div className="btn-group fade-up">
+                {/* International tel: — Part A fix */}
                 <a
-                  href={`tel:${settings.mobile}`}
+                  href="tel:+9779855054592"
                   className="btn btn-primary"
                   id="hero-call-btn"
                 >
@@ -183,7 +187,7 @@ export default async function HomePage() {
                 {t(settings.hours, lang)}
               </p>
               <a
-                href={`tel:${settings.phone.replace(/-/g, "")}`}
+                href="tel:+97756493487"
                 className="contact-detail__phone-big"
                 style={{ marginTop: "16px", display: "block" }}
               >
@@ -191,7 +195,7 @@ export default async function HomePage() {
               </a>
               <div className="btn-group" style={{ marginTop: "20px" }}>
                 <a
-                  href={`tel:${settings.mobile}`}
+                  href="tel:+9779855054592"
                   className="btn btn-primary"
                   id="contact-band-call-btn"
                 >
