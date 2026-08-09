@@ -1,7 +1,10 @@
 import { requireAdmin } from "@/lib/auth";
+import { waHref } from "@/lib/phone";
+import { nd } from "@/lib/lang";
 
 export default async function AdminGuidePage() {
   await requireAdmin();
+  const supportPhone = "9700042694";
 
   return (
     <div style={{ maxWidth: "800px" }}>
@@ -116,15 +119,15 @@ export default async function AdminGuidePage() {
         <p style={{ fontSize: "0.9375rem", lineHeight: 1.6, color: "var(--ink)", margin: 0 }}>
           वेबसाइट सम्बन्धी कुनै पनि प्राविधिक कठिनाइ, थप सुविधा आवश्यक परेमा वा सहयोग चाहिएमा जुनसुकै बेला सम्पर्क गर्न सक्नुहुन्छ:
           <br /><br />
-          <strong>विकासकर्ता (Developer):</strong> Zetroxy<br />
-          <strong>वेबसाइट:</strong>{" "}
+          <strong>विकासकर्ता:</strong> Zetroxy (Aaditya Chhetri)<br />
+          <strong>ह्वाट्सएप:</strong>{" "}
           <a
-            href="https://zetroxy.me/"
+            href={waHref(supportPhone)}
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: "var(--blue)", fontWeight: 600 }}
           >
-            https://zetroxy.me/ ↗
+            {nd(supportPhone, "ne")} ↗
           </a>
         </p>
       </div>

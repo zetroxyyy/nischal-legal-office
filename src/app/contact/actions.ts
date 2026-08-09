@@ -5,13 +5,13 @@ import { getSql } from "@/lib/db";
 import { getLang } from "@/lib/lang";
 
 export async function submitContactFormAction(formData: FormData) {
-  let redirectUrl = "/contact?sent=1";
+  let redirectUrl = "/contact?sent=1#contact-form";
 
   // 1. Honeypot check
   const honeypot = String(formData.get("website") || "").trim();
   if (honeypot) {
     // Bot detected: pretend success silently
-    redirect("/contact?sent=1");
+    redirect("/contact?sent=1#contact-form");
   }
 
   // 2. Timing check (minimum 3 seconds)
@@ -20,7 +20,7 @@ export async function submitContactFormAction(formData: FormData) {
   const now = Date.now();
   if (!renderedAt || isNaN(renderedAt) || now - renderedAt < 3000) {
     // Submitted too quickly (bot or spam)
-    redirect("/contact?err=1");
+    redirect("/contact?err=1#contact-form");
   }
 
   // 3. Extract & validate fields
@@ -30,7 +30,7 @@ export async function submitContactFormAction(formData: FormData) {
   const lang = await getLang();
 
   if (!name || !phone || !message) {
-    redirect("/contact?err=1");
+    redirect("/contact?err=1#contact-form");
   }
 
   try {
@@ -39,9 +39,10 @@ export async function submitContactFormAction(formData: FormData) {
       INSERT INTO messages (name, phone, message, lang, read, created_at)
       VALUES (${name}, ${phone}, ${message}, ${lang}, false, now())
     `;
+    redirectUrl = "/contact?sent=1#contact-form";
   } catch (err) {
     console.error("[submitContactFormAction] DB error:", err);
-    redirectUrl = "/contact?err=1";
+    redirectUrl = "/contact?err=1#contact-form";
   }
 
   redirect(redirectUrl);

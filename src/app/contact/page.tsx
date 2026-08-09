@@ -166,7 +166,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           </div>
 
           {/* ── PUBLIC CONTACT FORM ────────────────────────────────────────── */}
-          <div className="contact-form-wrap">
+          <div className="contact-form-wrap" id="contact-form">
             <div className="contact-form-card">
               <h2 className="lockup__heading" style={{ fontSize: "1.375rem", marginBottom: "8px" }}>
                 {formSendLabel}
