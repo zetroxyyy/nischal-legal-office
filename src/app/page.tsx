@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd, formatIndex } from "@/lib/lang";
+import { telHref, waHref } from "@/lib/phone";
 
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
@@ -35,9 +36,8 @@ export default async function HomePage() {
                 ))}
               </ul>
               <div className="btn-group fade-up">
-                {/* International tel: — Part A fix */}
                 <a
-                  href="tel:+9779855054592"
+                  href={telHref(settings.mobile)}
                   className="btn btn-primary"
                   id="hero-call-btn"
                 >
@@ -187,7 +187,7 @@ export default async function HomePage() {
                 {t(settings.hours, lang)}
               </p>
               <a
-                href="tel:+97756493487"
+                href={telHref(settings.phone)}
                 className="contact-detail__phone-big"
                 style={{ marginTop: "16px", display: "block" }}
               >
@@ -195,14 +195,14 @@ export default async function HomePage() {
               </a>
               <div className="btn-group" style={{ marginTop: "20px" }}>
                 <a
-                  href="tel:+9779855054592"
+                  href={telHref(settings.mobile)}
                   className="btn btn-primary"
                   id="contact-band-call-btn"
                 >
                   {t(ui.call, lang)}
                 </a>
                 <a
-                  href={`https://wa.me/${settings.whatsapp}`}
+                  href={waHref(settings.whatsapp)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-whatsapp"

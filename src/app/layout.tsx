@@ -3,6 +3,7 @@ import { Noto_Serif_Devanagari, Mukta } from "next/font/google";
 import "./globals.css";
 import { getContent } from "@/lib/content";
 import { getLang, t, nd } from "@/lib/lang";
+import { telHref } from "@/lib/phone";
 
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
@@ -65,11 +66,10 @@ export default async function RootLayout({
           <div className="container">
             <div className="top-strip__inner">
               <div className="top-strip__contacts">
-                {/* International tel: links — Part A fix */}
-                <a href="tel:+97756493487">
+                <a href={telHref(settings.phone)}>
                   {t(ui.phone_label, lang)}: {phoneDisplay}
                 </a>
-                <a href="tel:+9779855054592">
+                <a href={telHref(settings.mobile)}>
                   {t(ui.mobile_label, lang)}: {mobileDisplay}
                 </a>
                 <span className="top-strip__hours">{t(settings.hours, lang)}</span>
@@ -159,9 +159,9 @@ export default async function RootLayout({
                     <p>{t(settings.address, lang)}</p>
                     <p style={{ marginTop: "8px" }}>{t(settings.hours, lang)}</p>
                     <p style={{ marginTop: "8px" }}>
-                      <a href="tel:+97756493487">{phoneDisplay}</a>
+                      <a href={telHref(settings.phone)}>{phoneDisplay}</a>
                       {" · "}
-                      <a href="tel:+9779855054592">{mobileDisplay}</a>
+                      <a href={telHref(settings.mobile)}>{mobileDisplay}</a>
                     </p>
                     <p style={{ marginTop: "4px" }}>
                       <a href={`mailto:${settings.email}`}>{settings.email}</a>

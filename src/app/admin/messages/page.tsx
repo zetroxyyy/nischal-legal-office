@@ -1,5 +1,6 @@
 import { requireAdmin } from "@/lib/auth";
 import { getSql } from "@/lib/db";
+import { telHref } from "@/lib/phone";
 import { markMessageReadAction, deleteMessageAction } from "../actions";
 import Banner from "../components/Banner";
 
@@ -97,7 +98,7 @@ export default async function AdminMessagesPage({ searchParams }: PageProps) {
                     </td>
                     <td style={{ fontWeight: 600 }}>{m.name}</td>
                     <td>
-                      <a href={`tel:${m.phone}`} style={{ color: "var(--blue)", fontWeight: 500 }}>
+                      <a href={telHref(m.phone)} style={{ color: "var(--blue)", fontWeight: 500 }}>
                         {m.phone}
                       </a>
                     </td>

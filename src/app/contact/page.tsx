@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd } from "@/lib/lang";
+import { telHref, waHref } from "@/lib/phone";
 
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
@@ -49,14 +50,13 @@ export default async function ContactPage() {
                 <div className="contact-dl__row">
                   <dt className="contact-dl__label">{t(ui.phone_label, lang)}</dt>
                   <dd className="contact-dl__value">
-                    {/* International tel: — Part A fix */}
-                    <a href="tel:+97756493487">{phoneDisplay}</a>
+                    <a href={telHref(settings.phone)}>{phoneDisplay}</a>
                   </dd>
                 </div>
                 <div className="contact-dl__row">
                   <dt className="contact-dl__label">{t(ui.mobile_label, lang)}</dt>
                   <dd className="contact-dl__value">
-                    <a href="tel:+9779855054592">{mobileDisplay}</a>
+                    <a href={telHref(settings.mobile)}>{mobileDisplay}</a>
                   </dd>
                 </div>
                 <div className="contact-dl__row">
@@ -97,14 +97,14 @@ export default async function ContactPage() {
 
               <div className="btn-group">
                 <a
-                  href="tel:+9779855054592"
+                  href={telHref(settings.mobile)}
                   className="btn btn-primary"
                   id="contact-call-btn"
                 >
                   {t(ui.call, lang)}
                 </a>
                 <a
-                  href={`https://wa.me/${settings.whatsapp}`}
+                  href={waHref(settings.whatsapp)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-whatsapp"
