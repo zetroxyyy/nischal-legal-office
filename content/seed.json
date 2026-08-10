@@ -4,6 +4,7 @@
     "siteSub": { "ne": "आधिकारिक नोटरी पब्लिकको कार्यालय", "en": "Office of Nepal Notary Public" },
     "phone": "056-493487",
     "mobile": "9855054592",
+    "mobile2": "9855054592",
     "whatsapp": "9779855054592",
     "email": "nischallegalservice@gmail.com",
     "esewa": { "ne": "eSewa: ९८५५०५४५९२ (Nischal Legal Service)", "en": "eSewa: 9855054592 (Nischal Legal Service)" },
@@ -66,46 +67,164 @@
   },
 
   "services": {
-    "heading": { "ne": "सेवाहरू", "en": "Services" },
-    "intro": { "ne": "निश्चल कानूनी कार्यालयबाट उपलब्ध हुने मुख्य सेवाहरू यसप्रकार छन् । कुनै पनि सेवाका लागि सक्कल कागजातसहित कार्यालयमा सम्पर्क गर्नुहोस् ।", "en": "The main services available at Nischal Legal Office are listed below. For any service, please contact the office with your original documents." },
-    "items": [
+    "heading": { "ne": "उपलब्ध सेवाहरू", "en": "Available services" },
+    "intro": {
+      "ne": "निश्चल कानूनी कार्यालयबाट तीन फरक हैसियतमा सेवा प्रदान गरिन्छ — नोटरी पब्लिक, अधिवक्ता र अदालतबाट सूचीकृत मेलमिलापकर्ता । सेवाअनुसार आवश्यक कागजात फरक हुने भएकाले सक्कल कागजातसहित कार्यालयमा सम्पर्क गर्नुहोस् ।",
+      "en": "Nischal Legal Office provides services in three distinct capacities — Notary Public, Advocate, and court-listed Mediator. Requirements differ by service, so please contact the office with your original documents."
+    },
+    "categories": [
       {
-        "title": { "ne": "नोटरी प्रमाणित अनुवाद (नेपाली ⇄ English)", "en": "Notarised translation (Nepali ⇄ English)" },
-        "desc": { "ne": "शैक्षिक, अदालती, कम्पनी लगायतका कागजातहरूको आधिकारिक अनुवाद, नोटरी प्रमाणीकरण तथा कागजात प्रमाणित (Attestation) र भेरिफिकेसन सेवा ।", "en": "Official translation of academic, court, company and other documents, with notary certification, attestation and document verification." }
+        "title": { "ne": "नोटरी पब्लिकतर्फको सेवा", "en": "Notary Public services" },
+        "subtitle": {
+          "ne": "आधिकारिक नोटरी पब्लिक तथा आधिकारिक अनुवादकको हैसियतमा गरिने कामहरू",
+          "en": "Work carried out as an authorised Notary Public and authorised translator"
+        },
+        "groups": [
+          {
+            "title": { "ne": "अनुवाद प्रमाणीकरण तर्फ", "en": "Certification of translations" },
+            "items": [
+              {
+                "ne": "नागरिकता, जन्मदर्ता, विवाह दर्ता, लालपुर्जा लगायत निश्चित ढाँचा भएका लिखतहरू",
+                "en": "Citizenship, birth registration, marriage registration, land-ownership certificates and other documents in a prescribed format"
+              },
+              {
+                "ne": "सिफारिस स्टाइलका लिखतहरू",
+                "en": "Recommendation-style documents"
+              },
+              {
+                "ne": "निवेदन, अदालती कागजात, सम्झौता पत्र, करारनामा, विधान, प्रबन्धपत्र एवं नियमावली जस्ता कागजातहरू",
+                "en": "Applications, court documents, agreements, contracts, statutes, memoranda of association and rules"
+              }
+            ]
+          },
+          {
+            "title": { "ne": "सक्कल प्रमाणीकरण तर्फ", "en": "Certification of copies against originals" },
+            "items": [
+              {
+                "ne": "अध्ययनसँग सम्बन्धित कागजातहरू",
+                "en": "Education-related documents"
+              },
+              {
+                "ne": "व्यापारिक प्रयोजनका कागजातहरू",
+                "en": "Documents for business purposes"
+              }
+            ]
+          },
+          {
+            "title": { "ne": "लिखत प्रमाणीकरण तर्फ", "en": "Certification of deeds" },
+            "items": [
+              {
+                "ne": "शपथ पत्र, घोषणा पत्र लगायतका कागजातहरू",
+                "en": "Affidavits, declarations and similar documents"
+              }
+            ]
+          }
+        ],
+        "note": {
+          "ne": "नोटरी पब्लिकतर्फको सेवाको दस्तुर नोटरी पब्लिक सम्बन्धी (सातौँ संशोधन) नियमावली, २०८३ एवं सम्बन्धित निर्देशन बमोजिम हुनेछ ।",
+          "en": "Fees for notary public services are as prescribed by the Notary Public (Seventh Amendment) Rules, 2083 and the related directives."
+        }
       },
       {
-        "title": { "ne": "अदालती / दर्ता विवाह (Court Marriage)", "en": "Court marriage" },
-        "desc": { "ne": "दर्ता विवाहसम्बन्धी सम्पूर्ण कागजात तयारी र प्रक्रियामा सहयोग ।", "en": "Complete document preparation and assistance with the registered (court) marriage process." }
+        "title": { "ne": "कानुनी सेवा (वकालत) तर्फको सेवा", "en": "Legal services (advocacy)" },
+        "subtitle": {
+          "ne": "अधिवक्ताको हैसियतमा गरिने कामहरू",
+          "en": "Work carried out as an advocate"
+        },
+        "groups": [
+          {
+            "title": { "ne": "मुद्दा–मामिलातर्फ", "en": "Court cases" },
+            "items": [
+              {
+                "ne": "फिराद पत्र, प्रतिउत्तर पत्र, साक्षी बकपत्र तथा पुनरावेदन पत्र तयारी",
+                "en": "Preparation of plaints, written replies, witness depositions and appeal petitions"
+              },
+              {
+                "ne": "सबै तहका अदालतमा बहस पैरवी",
+                "en": "Pleading and advocacy at courts of all levels"
+              },
+              {
+                "ne": "देवानी तथा फौजदारी मुद्दासम्बन्धी कार्यहरू",
+                "en": "Civil and criminal case work"
+              },
+              {
+                "ne": "अदालती / दर्ता विवाह (Court Marriage) तथा सम्बन्ध विच्छेद (Divorce)",
+                "en": "Court marriage and divorce"
+              },
+              {
+                "ne": "अधिकृत वारेसनामा (जग्गा बिक्री, सम्बन्ध विच्छेद, मुद्दा दर्ता आदि)",
+                "en": "Power of attorney (land sale, divorce, case filing, etc.)"
+              }
+            ]
+          },
+          {
+            "title": { "ne": "कम्पनी तथा दर्तातर्फ", "en": "Company & registration" },
+            "items": [
+              {
+                "ne": "कम्पनी दर्ता, खारेज तथा कम्पनीसम्बन्धी सम्पूर्ण कामहरू",
+                "en": "Company registration, closure and all company-related work"
+              },
+              {
+                "ne": "संघ–संस्था दर्ता तथा नवीकरण",
+                "en": "Registration and renewal of associations and organisations"
+              },
+              {
+                "ne": "प्रबन्धपत्र (MoA), नियमावली (AoA), शेयर लगत/बिक्री, पुँजी वृद्धि, नामसारी, ठाउँसारी, नाम संशोधन",
+                "en": "MoA, AoA, share records and transfer, capital increase, name transfer, address change and name amendment"
+              },
+              {
+                "ne": "प्यान, भ्याट, कर तथा अडिटसम्बन्धी परामर्श",
+                "en": "PAN, VAT, tax and audit consultation"
+              }
+            ]
+          },
+          {
+            "title": { "ne": "सम्झौता तथा करारनामातर्फ", "en": "Agreements & contracts" },
+            "items": [
+              {
+                "ne": "घर, जग्गा, व्यवसाय तथा सवारी भाडा लगायतका सम्झौता–करारनामा लेखन",
+                "en": "Drafting of house, land, business and vehicle rental agreements and other contracts"
+              },
+              {
+                "ne": "नेपाली तथा English दुवै भाषामा सम्झौता पत्र / करारनामा तयारी",
+                "en": "Preparation of agreements and contracts in both Nepali and English"
+              }
+            ]
+          }
+        ],
+        "note": {
+          "ne": "असहाय एवं आर्थिक रूपमा कमजोर व्यक्तिहरूका लागि निःशुल्क कानुनी सेवा उपलब्ध छ ।",
+          "en": "Free legal service is available for destitute and economically weak persons."
+        }
       },
       {
-        "title": { "ne": "सम्बन्ध विच्छेद (Divorce)", "en": "Divorce" },
-        "desc": { "ne": "सम्बन्ध विच्छेदसम्बन्धी कानुनी परामर्श, कागजात तयारी तथा मुद्दा दर्ता प्रक्रियामा सहयोग ।", "en": "Legal counsel, documentation and filing assistance for divorce cases." }
-      },
-      {
-        "title": { "ne": "मुद्दा मामिला तथा कानुनी परामर्श", "en": "Court cases & legal counsel" },
-        "desc": { "ne": "देवानी, फौजदारी तथा कम्पनीसम्बन्धी मुद्दाहरूमा सबै तहका अदालतमा हुने कार्यहरू र शुद्ध कानुनी परामर्श ।", "en": "Civil, criminal and company cases at courts of all levels, national and international, with clear legal advice." }
-      },
-      {
-        "title": { "ne": "कम्पनी दर्ता तथा कम्पनीसम्बन्धी सम्पूर्ण काम", "en": "Company registration & all company work" },
-        "desc": { "ne": "कम्पनी दर्ता, खारेज, प्रबन्धपत्र (MA), नियमावली (AA), नामसारी, बिक्रीनामा, शेयर लगत/बिक्री, पुँजी वृद्धि, ठाउँसारी, नाम संशोधन, अध्यावधिक, उद्योग दर्ता, नविकरण लगायत ।", "en": "Registration and closure, MoA (MA), AoA (AA), name transfer, sale deeds, share records and transfer, capital increase, address change, name amendment, updates, industry registration and renewals." }
-      },
-      {
-        "title": { "ne": "प्यान, भ्याट, कर तथा अडिट परामर्श", "en": "PAN, VAT, tax & audit consultation" },
-        "desc": { "ne": "प्यान/भ्याट दर्ता तथा कर र अडिटसम्बन्धी परामर्श सेवा ।", "en": "PAN/VAT registration and consultation on tax and audit matters." }
-      },
-      {
-        "title": { "ne": "सम्झौता / करारनामा लेखन", "en": "Agreements & contracts" },
-        "desc": { "ne": "घर, जग्गा, व्यवसाय तथा सवारी भाडा लगायतका सम्झौता–करारनामाको लेखन र प्रमाणीकरण ।", "en": "Drafting and certification of house, land, business and vehicle rental agreements and other contracts." }
-      },
-      {
-        "title": { "ne": "अधिकृत वारेसनामा (Power of Attorney)", "en": "Power of attorney" },
-        "desc": { "ne": "जग्गा बिक्री, सम्बन्ध विच्छेद, मुद्दा दर्ता आदि प्रयोजनका लागि अधिकृत वारेसनामाको तयारी ।", "en": "Preparation of authorised power of attorney for land sale, divorce, case filing and similar purposes." }
-      },
-      {
-        "title": { "ne": "मध्यस्थता (Mediation)", "en": "Mediation" },
-        "desc": { "ne": "विवाद समाधानका लागि मध्यस्थता सेवा ।", "en": "Mediation service for dispute resolution." }
+        "title": { "ne": "मेलमिलापतर्फको सेवा", "en": "Mediation services" },
+        "subtitle": {
+          "ne": "चितवन जिल्ला अदालतबाट सूचीकृत मेलमिलापकर्ता",
+          "en": "Mediator listed with Chitwan District Court"
+        },
+        "groups": [
+          {
+            "title": { "ne": "", "en": "" },
+            "items": [
+              {
+                "ne": "अदालतको सूचीमा आबद्ध मुद्दा–मामिलाहरूमा मेलमिलाप गराउने",
+                "en": "Mediation of cases referred through the court's mediation roster"
+              },
+              {
+                "ne": "झैँ–झगडा तथा विवादहरू आपसी सहमतिबाट मिलाउने",
+                "en": "Settling disputes and disagreements through mutual understanding"
+              }
+            ]
+          }
+        ],
+        "note": { "ne": "", "en": "" }
       }
-    ]
+    ],
+    "note": {
+      "ne": "नोट: गलत नियतले वा गलत कागजात पेस गरी कुनै कागजात बनाइएमा त्यसको सम्पूर्ण जिम्मेवारी एवं दायित्व सम्बन्धित व्यक्ति स्वयंले लिनुपर्नेछ । साथै कम्प्युटर टाइपमा फरक परेमा सक्कल कागजात देखाई सच्याउनुहोला ।",
+      "en": "Note: if any document is prepared on the basis of false papers or with wrongful intent, full responsibility and liability rests with the person concerned. If there is any typing error, please bring the original document to have it corrected."
+    }
   },
 
   "docs": {

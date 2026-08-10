@@ -281,6 +281,12 @@ export async function updateSettingsAction(formData: FormData) {
       },
       phone: String(formData.get("phone") || "").trim(),
       mobile: String(formData.get("mobile") || "").trim(),
+      // mobile2 is optional: use form value if present, otherwise keep stored value
+      // Never wipe a stored mobile2 due to a missing form field
+      mobile2: (() => {
+        const v = String(formData.get("mobile2") ?? "").trim();
+        return v !== "" ? v : (content.settings.mobile2 ?? "");
+      })(),
       email: String(formData.get("email") || "").trim(),
       whatsapp: String(formData.get("whatsapp") || "").trim(),
       hours: {
@@ -437,104 +443,28 @@ export async function moveHeroPointAction(index: number, direction: "up" | "down
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SERVICES ACTIONS
+// SERVICES ACTIONS (Phase 5A: services.items replaced by categories — editor
+// is being upgraded in Phase 5B. These stubs prevent crashes from stale refs.)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export async function updateServicesAction(formData: FormData) {
+export async function updateServicesAction(_formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
-  try {
-    const content = await getRawContentForMutation();
-    content.services.heading = {
-      ne: String(formData.get("heading_ne") || "").trim(),
-      en: String(formData.get("heading_en") || "").trim(),
-    };
-    content.services.intro = {
-      ne: String(formData.get("intro_ne") || "").trim(),
-      en: String(formData.get("intro_en") || "").trim(),
-    };
-
-    const count = parseInt(String(formData.get("items_count") || "0"), 10);
-    const updatedItems = [];
-    for (let i = 0; i < count; i++) {
-      const titleNe = String(formData.get(`item_${i}_title_ne`) || "").trim();
-      const titleEn = String(formData.get(`item_${i}_title_en`) || "").trim();
-      const descNe = String(formData.get(`item_${i}_desc_ne`) || "").trim();
-      const descEn = String(formData.get(`item_${i}_desc_en`) || "").trim();
-      if (titleNe || titleEn) {
-        updatedItems.push({
-          title: { ne: titleNe, en: titleEn },
-          desc: { ne: descNe, en: descEn },
-        });
-      }
-    }
-    content.services.items = updatedItems;
-
-    await saveContentWithBackup(content);
-  } catch (err) {
-    console.error("[updateServicesAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
-  }
-
-  redirect(redirectUrl);
+  redirect("/admin/services?error=upgrade_in_progress");
 }
 
-export async function addServiceAction(formData: FormData) {
+export async function addServiceAction(_formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
-  try {
-    const content = await getRawContentForMutation();
-    const titleNe = String(formData.get("new_title_ne") || "").trim();
-    const titleEn = String(formData.get("new_title_en") || "").trim();
-    const descNe = String(formData.get("new_desc_ne") || "").trim();
-    const descEn = String(formData.get("new_desc_en") || "").trim();
-
-    if (titleNe || titleEn) {
-      content.services.items.push({
-        title: { ne: titleNe, en: titleEn },
-        desc: { ne: descNe, en: descEn },
-      });
-      await saveContentWithBackup(content);
-    }
-  } catch (err) {
-    console.error("[addServiceAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
-  }
-  redirect(redirectUrl);
+  redirect("/admin/services?error=upgrade_in_progress");
 }
 
-export async function deleteServiceAction(index: number) {
+export async function deleteServiceAction(_index: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
-  try {
-    const content = await getRawContentForMutation();
-    if (index >= 0 && index < content.services.items.length) {
-      content.services.items.splice(index, 1);
-      await saveContentWithBackup(content);
-    }
-  } catch (err) {
-    console.error("[deleteServiceAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
-  }
-  redirect(redirectUrl);
+  redirect("/admin/services?error=upgrade_in_progress");
 }
 
-export async function moveServiceAction(index: number, direction: "up" | "down") {
+export async function moveServiceAction(_index: number, _direction: "up" | "down") {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
-  try {
-    const content = await getRawContentForMutation();
-    const targetIndex = direction === "up" ? index - 1 : index + 1;
-    if (targetIndex >= 0 && targetIndex < content.services.items.length) {
-      const item = content.services.items.splice(index, 1)[0];
-      content.services.items.splice(targetIndex, 0, item);
-      await saveContentWithBackup(content);
-    }
-  } catch (err) {
-    console.error("[moveServiceAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
-  }
-  redirect(redirectUrl);
+  redirect("/admin/services?error=upgrade_in_progress");
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

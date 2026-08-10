@@ -84,14 +84,22 @@ export default async function HomePage() {
           <p style={{ marginBottom: "32px", color: "var(--muted)", maxWidth: "680px" }}>
             {t(services.intro, lang)}
           </p>
-          <div className="services-grid">
-            {services.items.map((item, i) => (
-              <div key={i} className="service-card">
-                <span className="service-card__index" aria-hidden="true">
+          <div className="services-categories-grid">
+            {services.categories.map((cat, i) => (
+              <div key={i} className="service-category-panel">
+                <span className="service-category-panel__index" aria-hidden="true">
                   {formatIndex(i + 1, lang)}
                 </span>
-                <h3 className="service-card__title">{t(item.title, lang)}</h3>
-                <p className="service-card__desc">{t(item.desc, lang)}</p>
+                <h3 className="service-category-panel__title">{t(cat.title, lang)}</h3>
+                <p className="service-category-panel__subtitle">{t(cat.subtitle, lang)}</p>
+                <ul className="service-category-panel__items">
+                  {cat.groups
+                    .flatMap((g) => g.items)
+                    .slice(0, 3)
+                    .map((item, j) => (
+                      <li key={j}>{t(item, lang)}</li>
+                    ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -100,6 +108,7 @@ export default async function HomePage() {
           </a>
         </div>
       </section>
+
 
       {/* ── ABOUT ─────────────────────────────────────────────────────────── */}
       <section>

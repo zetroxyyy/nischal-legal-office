@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
-import { getLang, t, t2, nd, formatIndex } from "@/lib/lang";
+import { getLang, t, t2, nd } from "@/lib/lang";
 
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
@@ -43,24 +43,68 @@ export default async function ServicesPage() {
         </div>
       </div>
 
-      {/* ── SERVICES FULL LIST ────────────────────────────────────────────── */}
+      {/* ── SERVICES FULL STRUCTURE ────────────────────────────────────────── */}
       <section>
         <div className="container">
-          <ol className="services-list" aria-label={t(services.heading, lang)}>
-            {services.items.map((item, i) => (
-              <li key={i} className="services-list__item">
-                <span className="services-list__num" aria-hidden="true">
-                  {formatIndex(i + 1, lang)}
-                </span>
-                <div>
-                  <p className="services-list__title">{t(item.title, lang)}</p>
-                  <p className="services-list__desc">{t(item.desc, lang)}</p>
+          {services.categories.map((cat, ci) => {
+            const catNote = t(cat.note, lang);
+            return (
+              <div key={ci} className="services-category-section">
+                {/* Category heading — bilingual board-lockup style */}
+                <div className="lockup">
+                  <h2 className="lockup__heading">{t(cat.title, lang)}</h2>
+                  <p className="lockup__sub">{t2(cat.title, lang)}</p>
+                  <div className="lockup__rule"></div>
                 </div>
-              </li>
-            ))}
-          </ol>
+                {/* Category subtitle in blue */}
+                <p className="services-category-subtitle">{t(cat.subtitle, lang)}</p>
+
+                {/* Groups */}
+                {cat.groups.map((group, gi) => {
+                  const groupTitle = t(group.title, lang).trim();
+                  return (
+                    <div key={gi} className="services-group">
+                      {/* Red band header — only if group title is non-empty */}
+                      {groupTitle && (
+                        <div className="doc-card__header services-group__band">
+                          <h3 className="doc-card__title">{groupTitle}</h3>
+                        </div>
+                      )}
+                      <ol className="services-items-list" aria-label={groupTitle || t(cat.title, lang)}>
+                        {group.items.map((item, ii) => (
+                          <li key={ii}>
+                            <span className="services-list__num" aria-hidden="true">
+                              {nd(String(ii + 1), lang)}
+                            </span>
+                            <span>{t(item, lang)}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  );
+                })}
+
+                {/* Category note — 3px red left border panel, only if non-empty */}
+                {catNote && (
+                  <div className="disclaimer services-cat-note" role="note">
+                    {catNote}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {/* Global services.note — board-framed panel */}
+          {t(services.note, lang) && (
+            <div className="board-frame services-global-note" role="note">
+              <p style={{ margin: 0, lineHeight: 1.7, fontSize: "0.9375rem" }}>
+                {t(services.note, lang)}
+              </p>
+            </div>
+          )}
         </div>
       </section>
+
 
       {/* ── DOCUMENTS SECTION ─────────────────────────────────────────────── */}
       <section className="section-bg-alt">

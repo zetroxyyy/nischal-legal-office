@@ -82,6 +82,22 @@ export default async function AdminSettingsPage({ searchParams }: PageProps) {
           <div className="admin-bilingual-grid" style={{ marginBottom: "16px" }}>
             <div>
               <label className="admin-label">
+                मोबाइल २ (Second Mobile — optional)
+              </label>
+              <input
+                type="text"
+                name="mobile2"
+                defaultValue={s.mobile2 ?? ""}
+                className="admin-input"
+                placeholder="9855054592 (वा खाली छोड्नुहोस्)"
+              />
+            </div>
+            <div />
+          </div>
+
+          <div className="admin-bilingual-grid" style={{ marginBottom: "16px" }}>
+            <div>
+              <label className="admin-label">
                 इमेल (Email Address)
               </label>
               <input

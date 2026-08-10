@@ -37,6 +37,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
   const phoneDisplay = nd(settings.phone, lang);
   const mobileDisplay = nd(settings.mobile, lang);
+  const mobile2Display = settings.mobile2 ? nd(settings.mobile2, lang) : "";
 
   const formNameLabel = ui.form_name ? t(ui.form_name, lang) : (lang === "ne" ? "नाम" : "Name");
   const formPhoneLabel = ui.form_phone ? t(ui.form_phone, lang) : (lang === "ne" ? "फोन / मोबाइल" : "Phone");
@@ -84,6 +85,16 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     <a href={telHref(settings.mobile)}>{mobileDisplay}</a>
                   </dd>
                 </div>
+                {settings.mobile2 && (
+                  <div className="contact-dl__row">
+                    <dt className="contact-dl__label">
+                      {lang === "ne" ? "मोबाइल २" : "Mobile 2"}
+                    </dt>
+                    <dd className="contact-dl__value">
+                      <a href={telHref(settings.mobile2)}>{mobile2Display}</a>
+                    </dd>
+                  </div>
+                )}
                 <div className="contact-dl__row">
                   <dt className="contact-dl__label">{t(ui.email_label, lang)}</dt>
                   <dd className="contact-dl__value">

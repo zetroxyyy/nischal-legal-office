@@ -61,6 +61,7 @@ export default async function RootLayout({
 
   const phoneDisplay = nd(settings.phone, lang);
   const mobileDisplay = nd(settings.mobile, lang);
+  const mobile2Display = settings.mobile2 ? nd(settings.mobile2, lang) : "";
   const currentYear = nd(String(new Date().getFullYear()), lang);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nischal-legal-office.vercel.app";
   const ogImageUrl = settings.seo.ogImage.startsWith("http")
@@ -137,6 +138,11 @@ export default async function RootLayout({
                 <a href={telHref(settings.mobile)}>
                   {t(ui.mobile_label, lang)}: {mobileDisplay}
                 </a>
+                {settings.mobile2 && (
+                  <a href={telHref(settings.mobile2)}>
+                    {t(ui.mobile_label, lang)} २: {mobile2Display}
+                  </a>
+                )}
                 <span className="top-strip__hours">{t(settings.hours, lang)}</span>
               </div>
               <div className="lang-toggle">
@@ -228,6 +234,12 @@ export default async function RootLayout({
                       <a href={telHref(settings.phone)}>{phoneDisplay}</a>
                       {" · "}
                       <a href={telHref(settings.mobile)}>{mobileDisplay}</a>
+                      {settings.mobile2 && (
+                        <>
+                          {" · "}
+                          <a href={telHref(settings.mobile2)}>{mobile2Display}</a>
+                        </>
+                      )}
                     </p>
                     <p style={{ marginTop: "4px" }}>
                       <a href={`mailto:${settings.email}`}>{settings.email}</a>

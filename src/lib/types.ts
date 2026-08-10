@@ -10,6 +10,23 @@ export interface ServiceItem {
   desc: BilingualPair;
 }
 
+export interface ServiceBilingualItem {
+  ne: string;
+  en: string;
+}
+
+export interface ServiceGroup {
+  title: BilingualPair;
+  items: ServiceBilingualItem[];
+}
+
+export interface ServiceCategory {
+  title: BilingualPair;
+  subtitle: BilingualPair;
+  note: BilingualPair;
+  groups: ServiceGroup[];
+}
+
 export interface DocGroup {
   title: BilingualPair;
   items: BilingualPair[];
@@ -26,6 +43,7 @@ export interface SeedData {
     siteSub: BilingualPair;
     phone: string;
     mobile: string;
+    mobile2?: string;
     whatsapp: string;
     email: string;
     esewa: BilingualPair;
@@ -73,7 +91,8 @@ export interface SeedData {
   services: {
     heading: BilingualPair;
     intro: BilingualPair;
-    items: ServiceItem[];
+    note: BilingualPair;
+    categories: ServiceCategory[];
   };
   docs: {
     heading: BilingualPair;
