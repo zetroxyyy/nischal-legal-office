@@ -2,6 +2,7 @@
   "name": "nischal-legal-office",
   "version": "1.0.0",
   "description": "Production Next.js 16 bilingual legal office website with a custom serverless Postgres CMS",
+  "homepage": "https://nischal-legal-office.vercel.app",
   "private": true,
   "scripts": {
     "dev": "next dev",

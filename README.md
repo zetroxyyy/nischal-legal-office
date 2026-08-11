@@ -1,5 +1,7 @@
 # Nischal Legal Office
 
+[https://nischal-legal-office.vercel.app](https://nischal-legal-office.vercel.app)
+
 > Production Next.js 16 bilingual legal office website with a custom serverless Postgres CMS.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.3.0-black?logo=next.js)](https://nextjs.org/)
@@ -17,16 +19,17 @@ Built for a Nepalese legal practice, complete internationalization is baked into
 
 ## Screenshots
 
-<!-- TODO: live URL -->
+![Homepage desktop hero view at 1440px viewport width](docs/screenshots/home-desktop.png)
+*Homepage desktop hero view showcasing practice areas and bilingual layout.*
 
-| View | Description | File Path |
-| --- | --- | --- |
-| **Homepage** | Desktop hero & practice overview (1440px wide) | `docs/screenshots/home-desktop.png` |
-| **Services Page** | Practice areas and legal consultation breakdown | `docs/screenshots/services.png` |
-| **Admin Dashboard** | Purpose-built CMS management hub | `docs/screenshots/admin-dashboard.png` |
-| **Hero Content Editor** | Direct bilingual content and image manager | `docs/screenshots/admin-hero-editor.png` |
+![Services catalog and practice details page](docs/screenshots/services.png)
+*Legal services and practice areas catalog page.*
 
-> Note: Screenshots are pending owner capture. Any client contact form submissions or personal phone details visible in administrative screenshots must be redacted before committing.
+![Custom administrative CMS dashboard](docs/screenshots/admin-dashboard.png)
+*Administrative CMS dashboard overview for office staff.*
+
+![Bilingual hero banner content editor screen](docs/screenshots/admin-hero-editor.png)
+*Content editor interface for real-time section updates.*
 
 ## Features
 
