@@ -12,6 +12,7 @@ import {
   moveServiceItemAction,
 } from "../../actions";
 import Banner from "../../components/Banner";
+import ConfirmSubmitButton from "../../components/ConfirmSubmitButton";
 
 interface PageProps {
   params: Promise<{ index: string }>;
@@ -138,20 +139,10 @@ export default async function AdminServiceCategoryPage({
                 <form
                   action={deleteServiceGroupAction.bind(null, catIndex, gi)}
                 >
-                  <button
-                    type="submit"
-                    className="admin-btn admin-btn--danger admin-btn--sm"
-                    onClick={(e) => {
-                      if (
-                        !confirm(
-                          `समूह "${group.title.ne || `#${gi + 1}`}" र यसका सबै सेवाहरू हटाउने? (Delete group and all its items?)`
-                        )
-                      )
-                        e.preventDefault();
-                    }}
-                  >
-                    समूह हटाउनुहोस्
-                  </button>
+                  <ConfirmSubmitButton
+                    label="समूह हटाउनुहोस्"
+                    confirmMessage={`समूह "${group.title.ne || `#${gi + 1}`}" र यसका सबै सेवाहरू हटाउने? (Delete group and all its items?)`}
+                  />
                 </form>
               </div>
             </div>
@@ -290,12 +281,10 @@ export default async function AdminServiceCategoryPage({
                         ii
                       )}
                     >
-                      <button
-                        type="submit"
-                        className="admin-btn admin-btn--danger admin-btn--sm"
-                      >
-                        हटाउनुहोस्
-                      </button>
+                      <ConfirmSubmitButton
+                        label="हटाउनुहोस्"
+                        confirmMessage={`सेवा #${ii + 1} (${item.ne || item.en || "Item"}) हटाउने? (Delete this service item?)`}
+                      />
                     </form>
                   </div>
                 </div>

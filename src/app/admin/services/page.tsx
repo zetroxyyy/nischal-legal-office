@@ -10,6 +10,7 @@ import {
 } from "../actions";
 import Banner from "../components/Banner";
 import BilingualField from "../components/BilingualField";
+import ConfirmSubmitButton from "../components/ConfirmSubmitButton";
 
 interface PageProps {
   searchParams: Promise<{ ok?: string; error?: string }>;
@@ -134,20 +135,10 @@ export default async function AdminServicesPage({ searchParams }: PageProps) {
                   </form>
                   {/* Delete */}
                   <form action={deleteServiceCategoryAction.bind(null, ci)}>
-                    <button
-                      type="submit"
-                      className="admin-btn admin-btn--danger admin-btn--sm"
-                      onClick={(e) => {
-                        if (
-                          !confirm(
-                            `वर्ग "#${ci + 1}: ${cat.title.ne}" सहित यसका सबै समूह र सेवाहरू हटाउने? (Delete category and all its groups/items?)`
-                          )
-                        )
-                          e.preventDefault();
-                      }}
-                    >
-                      हटाउनुहोस् (Delete)
-                    </button>
+                    <ConfirmSubmitButton
+                      label="हटाउनुहोस् (Delete)"
+                      confirmMessage={`वर्ग "#${ci + 1}: ${cat.title.ne}" सहित यसका सबै समूह र सेवाहरू हटाउने? (Delete category and all its groups/items?)`}
+                    />
                   </form>
                 </div>
               </div>
