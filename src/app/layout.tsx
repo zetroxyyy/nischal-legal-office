@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { Noto_Serif_Devanagari, Mukta } from "next/font/google";
 import "./globals.css";
 import { getContent } from "@/lib/content";
@@ -23,6 +24,7 @@ const mukta = Mukta({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
+  await connection();
   const lang = await getLang();
   const seed = await getContent();
   const { settings } = seed;
