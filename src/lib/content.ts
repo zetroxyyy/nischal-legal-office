@@ -13,10 +13,6 @@ const localSeed: SiteContent = seedJson as SiteContent;
  *
  * Caching: uses Next.js 16 "use cache" + cacheTag so the result is cached
  * for 300 s and can be invalidated on-demand with revalidateTag("content").
- *
- * Fallback: if DATABASE_URL is missing, the DB query fails, or row id=1
- * doesn't exist, the function logs a one-line warning and returns the
- * imported seed.json so that local dev and `next build` work with no DB.
  */
 export async function getContent(): Promise<SiteContent> {
   "use cache";
@@ -44,6 +40,30 @@ export async function getContent(): Promise<SiteContent> {
       "[content] DB query failed — using local seed.json fallback.",
       String(err)
     );
+    return localSeed;
+  }
+}
+
+/**
+ * getUncachedContent() — uncached read from database for admin pages and mutations.
+ * Bypasses Next.js 16 "use cache" so admin pages ALWAYS render current DB data.
+ */
+export async function getUncachedContent(): Promise<SiteContent> {
+  const dbUrl = process.env.DATABASE_URL ?? process.env.POSTGRES_URL;
+  if (!dbUrl) {
+    return localSeed;
+  }
+
+  try {
+    const { neon } = await import("@neondatabase/serverless");
+    const sql = neon(dbUrl);
+    const rows = await sql`SELECT data FROM site_content WHERE id = 1 LIMIT 1`;
+    if (!rows || rows.length === 0) {
+      return localSeed;
+    }
+    return rows[0].data as SiteContent;
+  } catch (err) {
+    console.warn("[getUncachedContent] DB query failed — fallback:", String(err));
     return localSeed;
   }
 }

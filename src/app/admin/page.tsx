@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/auth";
-import { getContent } from "@/lib/content";
+import { getUncachedContent } from "@/lib/content";
 import { getSql } from "@/lib/db";
 
 const SECTIONS = [
@@ -20,7 +20,7 @@ const SECTIONS = [
 
 export default async function AdminDashboardPage() {
   await requireAdmin();
-  const content = await getContent();
+  const content = await getUncachedContent();
 
   const sql = getSql();
   let unreadCount = 0;
