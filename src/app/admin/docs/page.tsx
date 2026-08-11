@@ -1,5 +1,5 @@
 import { requireAdmin } from "@/lib/auth";
-import { getUncachedContent } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import {
   updateDocsAction,
   addDocGroupAction,
@@ -12,13 +12,13 @@ import Banner from "../components/Banner";
 import BilingualField from "../components/BilingualField";
 
 interface PageProps {
-  searchParams: Promise<{ ok?: string; error?: string; status?: string }>;
+  searchParams: Promise<{ ok?: string; error?: string }>;
 }
 
 export default async function AdminDocsPage({ searchParams }: PageProps) {
   await requireAdmin();
-  const { ok, error, status } = await searchParams;
-  const content = await getUncachedContent();
+  const { ok, error } = await searchParams;
+  const content = await getContent();
   const d = content.docs;
 
   return (

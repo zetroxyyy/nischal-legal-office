@@ -1,11 +1,11 @@
 import { requireAdmin } from "@/lib/auth";
-import { getUncachedContent } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { getSql } from "@/lib/db";
 import { updateAdvancedAction, restoreBackupAction } from "../actions";
 import Banner from "../components/Banner";
 
 interface PageProps {
-  searchParams: Promise<{ ok?: string; error?: string; status?: string }>;
+  searchParams: Promise<{ ok?: string; error?: string }>;
 }
 
 interface BackupRow {
@@ -15,8 +15,8 @@ interface BackupRow {
 
 export default async function AdminAdvancedPage({ searchParams }: PageProps) {
   await requireAdmin();
-  const { ok, error, status } = await searchParams;
-  const content = await getUncachedContent();
+  const { ok, error } = await searchParams;
+  const content = await getContent();
 
   let backups: BackupRow[] = [];
   try {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/auth";
-import { getUncachedContent } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import {
   updateServicesHeaderAction,
   updateServicesCategoriesAction,
@@ -13,13 +13,13 @@ import BilingualField from "../components/BilingualField";
 import ConfirmSubmitButton from "../components/ConfirmSubmitButton";
 
 interface PageProps {
-  searchParams: Promise<{ ok?: string; error?: string; status?: string }>;
+  searchParams: Promise<{ ok?: string; error?: string }>;
 }
 
 export default async function AdminServicesPage({ searchParams }: PageProps) {
   await requireAdmin();
-  const { ok, error, status } = await searchParams;
-  const content = await getUncachedContent();
+  const { ok, error } = await searchParams;
+  const content = await getContent();
   const s = content.services;
 
   return (
