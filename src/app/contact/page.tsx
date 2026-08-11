@@ -198,7 +198,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
               )}
 
-              <form action={submitContactFormAction}>
+              <form action={submitContactFormAction} key={sent === "1" ? "sent" : "form"}>
                 {/* Honeypot field (hidden from genuine users) */}
                 <div style={{ display: "none" }} aria-hidden="true">
                   <label htmlFor="website">Website</label>

@@ -215,7 +215,7 @@ export async function changePasswordAction(formData: FormData) {
   const newPassword = String(formData.get("new_password") || "");
   const confirmPassword = String(formData.get("confirm_password") || "");
 
-  let redirectUrl = "/admin/password?ok=1";
+  let redirectUrl = "/admin/password?status=password";
 
   if (!currentPassword || !newPassword || !confirmPassword) {
     redirect("/admin/password?error=all_fields_required");
@@ -266,7 +266,7 @@ export async function changePasswordAction(formData: FormData) {
 
 export async function updateSettingsAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/settings?ok=1";
+  let redirectUrl = "/admin/settings?status=saved";
   try {
     const content = await getRawContentForMutation();
 
@@ -341,7 +341,7 @@ export async function updateSettingsAction(formData: FormData) {
 
 export async function updateHeroAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/hero?ok=1";
+  let redirectUrl = "/admin/hero?status=saved";
   try {
     const content = await getRawContentForMutation();
 
@@ -367,6 +367,7 @@ export async function updateHeroAction(formData: FormData) {
     if (imageFile && imageFile.size > 0) {
       const newUrl = await uploadToBlob(imageFile, "hero", content.hero.image);
       content.hero.image = newUrl;
+      redirectUrl = "/admin/hero?status=uploaded";
     }
 
     // Points
@@ -392,7 +393,7 @@ export async function updateHeroAction(formData: FormData) {
 
 export async function addHeroPointAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/hero?ok=1";
+  let redirectUrl = "/admin/hero?status=added";
   try {
     const content = await getRawContentForMutation();
     const ne = String(formData.get("new_point_ne") || "").trim();
@@ -410,7 +411,7 @@ export async function addHeroPointAction(formData: FormData) {
 
 export async function deleteHeroPointAction(index: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/hero?ok=1";
+  let redirectUrl = "/admin/hero?status=deleted";
   try {
     const content = await getRawContentForMutation();
     if (index >= 0 && index < content.hero.points.length) {
@@ -426,7 +427,7 @@ export async function deleteHeroPointAction(index: number) {
 
 export async function moveHeroPointAction(index: number, direction: "up" | "down") {
   await requireAdmin();
-  let redirectUrl = "/admin/hero?ok=1";
+  let redirectUrl = "/admin/hero?status=moved";
   try {
     const content = await getRawContentForMutation();
     const targetIndex = direction === "up" ? index - 1 : index + 1;
@@ -449,7 +450,7 @@ export async function moveHeroPointAction(index: number, direction: "up" | "down
 /** Save services section header: heading, intro, global note */
 export async function updateServicesHeaderAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
+  let redirectUrl = "/admin/services?status=saved";
   try {
     const content = await getRawContentForMutation();
     content.services.heading = {
@@ -467,7 +468,7 @@ export async function updateServicesHeaderAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[updateServicesHeaderAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
+    redirectUrl = "/admin/services?status=error";
   }
   redirect(redirectUrl);
 }
@@ -475,7 +476,7 @@ export async function updateServicesHeaderAction(formData: FormData) {
 /** Bulk-save category title / subtitle / note for all categories */
 export async function updateServicesCategoriesAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
+  let redirectUrl = "/admin/services?status=saved";
   try {
     const content = await getRawContentForMutation();
     const count = parseInt(String(formData.get("cats_count") || "0"), 10);
@@ -496,7 +497,7 @@ export async function updateServicesCategoriesAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[updateServicesCategoriesAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
+    redirectUrl = "/admin/services?status=error";
   }
   redirect(redirectUrl);
 }
@@ -504,7 +505,7 @@ export async function updateServicesCategoriesAction(formData: FormData) {
 /** Add a new empty category */
 export async function addServiceCategoryAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
+  let redirectUrl = "/admin/services?status=added";
   try {
     const content = await getRawContentForMutation();
     const titleNe = String(formData.get("new_cat_title_ne") || "").trim();
@@ -520,7 +521,7 @@ export async function addServiceCategoryAction(formData: FormData) {
     }
   } catch (err) {
     console.error("[addServiceCategoryAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
+    redirectUrl = "/admin/services?status=error";
   }
   redirect(redirectUrl);
 }
@@ -528,7 +529,7 @@ export async function addServiceCategoryAction(formData: FormData) {
 /** Delete a category by index */
 export async function deleteServiceCategoryAction(index: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
+  let redirectUrl = "/admin/services?status=deleted";
   try {
     const content = await getRawContentForMutation();
     if (index >= 0 && index < content.services.categories.length) {
@@ -537,7 +538,7 @@ export async function deleteServiceCategoryAction(index: number) {
     }
   } catch (err) {
     console.error("[deleteServiceCategoryAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
+    redirectUrl = "/admin/services?status=error";
   }
   redirect(redirectUrl);
 }
@@ -545,7 +546,7 @@ export async function deleteServiceCategoryAction(index: number) {
 /** Move a category up or down */
 export async function moveServiceCategoryAction(index: number, direction: "up" | "down") {
   await requireAdmin();
-  let redirectUrl = "/admin/services?ok=1";
+  let redirectUrl = "/admin/services?status=moved";
   try {
     const content = await getRawContentForMutation();
     const cats = content.services.categories;
@@ -557,7 +558,7 @@ export async function moveServiceCategoryAction(index: number, direction: "up" |
     }
   } catch (err) {
     console.error("[moveServiceCategoryAction] error:", err);
-    redirectUrl = "/admin/services?error=1";
+    redirectUrl = "/admin/services?status=error";
   }
   redirect(redirectUrl);
 }
@@ -568,12 +569,12 @@ export async function updateServiceCategoryGroupsAction(
   formData: FormData
 ) {
   await requireAdmin();
-  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  let redirectUrl = `/admin/services/${catIndex}?status=saved`;
   try {
     const content = await getRawContentForMutation();
     const cats = content.services.categories;
     if (catIndex < 0 || catIndex >= cats.length) {
-      redirectUrl = "/admin/services?error=1";
+      redirectUrl = "/admin/services?status=error";
     } else {
       const groupCount = parseInt(String(formData.get("groups_count") || "0"), 10);
       for (let gi = 0; gi < groupCount && gi < cats[catIndex].groups.length; gi++) {
@@ -600,7 +601,7 @@ export async function updateServiceCategoryGroupsAction(
     }
   } catch (err) {
     console.error("[updateServiceCategoryGroupsAction] error:", err);
-    redirectUrl = `/admin/services/${catIndex}?error=1`;
+    redirectUrl = `/admin/services/${catIndex}?status=error`;
   }
   redirect(redirectUrl);
 }
@@ -608,7 +609,7 @@ export async function updateServiceCategoryGroupsAction(
 /** Add a new empty group to a category */
 export async function addServiceGroupAction(catIndex: number, formData: FormData) {
   await requireAdmin();
-  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  let redirectUrl = `/admin/services/${catIndex}?status=added`;
   try {
     const content = await getRawContentForMutation();
     const cats = content.services.categories;
@@ -623,7 +624,7 @@ export async function addServiceGroupAction(catIndex: number, formData: FormData
     }
   } catch (err) {
     console.error("[addServiceGroupAction] error:", err);
-    redirectUrl = `/admin/services/${catIndex}?error=1`;
+    redirectUrl = `/admin/services/${catIndex}?status=error`;
   }
   redirect(redirectUrl);
 }
@@ -631,7 +632,7 @@ export async function addServiceGroupAction(catIndex: number, formData: FormData
 /** Delete a group from a category */
 export async function deleteServiceGroupAction(catIndex: number, groupIndex: number) {
   await requireAdmin();
-  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  let redirectUrl = `/admin/services/${catIndex}?status=deleted`;
   try {
     const content = await getRawContentForMutation();
     const cats = content.services.categories;
@@ -646,7 +647,7 @@ export async function deleteServiceGroupAction(catIndex: number, groupIndex: num
     }
   } catch (err) {
     console.error("[deleteServiceGroupAction] error:", err);
-    redirectUrl = `/admin/services/${catIndex}?error=1`;
+    redirectUrl = `/admin/services/${catIndex}?status=error`;
   }
   redirect(redirectUrl);
 }
@@ -658,7 +659,7 @@ export async function moveServiceGroupAction(
   direction: "up" | "down"
 ) {
   await requireAdmin();
-  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  let redirectUrl = `/admin/services/${catIndex}?status=moved`;
   try {
     const content = await getRawContentForMutation();
     const groups = content.services.categories[catIndex]?.groups;
@@ -671,7 +672,7 @@ export async function moveServiceGroupAction(
     }
   } catch (err) {
     console.error("[moveServiceGroupAction] error:", err);
-    redirectUrl = `/admin/services/${catIndex}?error=1`;
+    redirectUrl = `/admin/services/${catIndex}?status=error`;
   }
   redirect(redirectUrl);
 }
@@ -683,20 +684,28 @@ export async function addServiceItemAction(
   formData: FormData
 ) {
   await requireAdmin();
-  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  let redirectUrl = `/admin/services/${catIndex}?status=added`;
   try {
     const content = await getRawContentForMutation();
     const group = content.services.categories[catIndex]?.groups[groupIndex];
     if (!group) throw new Error("group not found");
-    const ne = String(formData.get("new_item_ne") || "").trim();
-    const en = String(formData.get("new_item_en") || "").trim();
+    const ne = String(
+      formData.get(`new_item_${groupIndex}_ne`) ||
+        formData.get("new_item_ne") ||
+        ""
+    ).trim();
+    const en = String(
+      formData.get(`new_item_${groupIndex}_en`) ||
+        formData.get("new_item_en") ||
+        ""
+    ).trim();
     if (ne || en) {
       group.items.push({ ne, en });
       await saveContentWithBackup(content);
     }
   } catch (err) {
     console.error("[addServiceItemAction] error:", err);
-    redirectUrl = `/admin/services/${catIndex}?error=1`;
+    redirectUrl = `/admin/services/${catIndex}?status=error`;
   }
   redirect(redirectUrl);
 }
@@ -708,7 +717,7 @@ export async function deleteServiceItemAction(
   itemIndex: number
 ) {
   await requireAdmin();
-  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  let redirectUrl = `/admin/services/${catIndex}?status=deleted`;
   try {
     const content = await getRawContentForMutation();
     const items = content.services.categories[catIndex]?.groups[groupIndex]?.items;
@@ -719,7 +728,7 @@ export async function deleteServiceItemAction(
     }
   } catch (err) {
     console.error("[deleteServiceItemAction] error:", err);
-    redirectUrl = `/admin/services/${catIndex}?error=1`;
+    redirectUrl = `/admin/services/${catIndex}?status=error`;
   }
   redirect(redirectUrl);
 }
@@ -732,7 +741,7 @@ export async function moveServiceItemAction(
   direction: "up" | "down"
 ) {
   await requireAdmin();
-  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  let redirectUrl = `/admin/services/${catIndex}?status=moved`;
   try {
     const content = await getRawContentForMutation();
     const items = content.services.categories[catIndex]?.groups[groupIndex]?.items;
@@ -745,7 +754,7 @@ export async function moveServiceItemAction(
     }
   } catch (err) {
     console.error("[moveServiceItemAction] error:", err);
-    redirectUrl = `/admin/services/${catIndex}?error=1`;
+    redirectUrl = `/admin/services/${catIndex}?status=error`;
   }
   redirect(redirectUrl);
 }
@@ -757,7 +766,7 @@ export async function moveServiceItemAction(
 
 export async function updateDocsAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/docs?ok=1";
+  let redirectUrl = "/admin/docs?status=saved";
   try {
     const content = await getRawContentForMutation();
     content.docs.heading = {
@@ -799,7 +808,7 @@ export async function updateDocsAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[updateDocsAction] error:", err);
-    redirectUrl = "/admin/docs?error=1";
+    redirectUrl = "/admin/docs?status=error";
   }
 
   redirect(redirectUrl);
@@ -807,7 +816,7 @@ export async function updateDocsAction(formData: FormData) {
 
 export async function addDocGroupAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/docs?ok=1";
+  let redirectUrl = "/admin/docs?status=added";
   try {
     const content = await getRawContentForMutation();
     const titleNe = String(formData.get("new_group_title_ne") || "").trim();
@@ -821,14 +830,14 @@ export async function addDocGroupAction(formData: FormData) {
     }
   } catch (err) {
     console.error("[addDocGroupAction] error:", err);
-    redirectUrl = "/admin/docs?error=1";
+    redirectUrl = "/admin/docs?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function deleteDocGroupAction(groupIndex: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/docs?ok=1";
+  let redirectUrl = "/admin/docs?status=deleted";
   try {
     const content = await getRawContentForMutation();
     if (groupIndex >= 0 && groupIndex < content.docs.groups.length) {
@@ -837,14 +846,14 @@ export async function deleteDocGroupAction(groupIndex: number) {
     }
   } catch (err) {
     console.error("[deleteDocGroupAction] error:", err);
-    redirectUrl = "/admin/docs?error=1";
+    redirectUrl = "/admin/docs?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function addDocItemAction(groupIndex: number, formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/docs?ok=1";
+  let redirectUrl = "/admin/docs?status=added";
   try {
     const content = await getRawContentForMutation();
     const itemNe = String(formData.get("new_item_ne") || "").trim();
@@ -855,14 +864,14 @@ export async function addDocItemAction(groupIndex: number, formData: FormData) {
     }
   } catch (err) {
     console.error("[addDocItemAction] error:", err);
-    redirectUrl = "/admin/docs?error=1";
+    redirectUrl = "/admin/docs?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function deleteDocItemAction(groupIndex: number, itemIndex: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/docs?ok=1";
+  let redirectUrl = "/admin/docs?status=deleted";
   try {
     const content = await getRawContentForMutation();
     if (
@@ -876,7 +885,7 @@ export async function deleteDocItemAction(groupIndex: number, itemIndex: number)
     }
   } catch (err) {
     console.error("[deleteDocItemAction] error:", err);
-    redirectUrl = "/admin/docs?error=1";
+    redirectUrl = "/admin/docs?status=error";
   }
   redirect(redirectUrl);
 }
@@ -887,7 +896,7 @@ export async function moveDocItemAction(
   direction: "up" | "down"
 ) {
   await requireAdmin();
-  let redirectUrl = "/admin/docs?ok=1";
+  let redirectUrl = "/admin/docs?status=moved";
   try {
     const content = await getRawContentForMutation();
     if (groupIndex >= 0 && groupIndex < content.docs.groups.length) {
@@ -901,7 +910,7 @@ export async function moveDocItemAction(
     }
   } catch (err) {
     console.error("[moveDocItemAction] error:", err);
-    redirectUrl = "/admin/docs?error=1";
+    redirectUrl = "/admin/docs?status=error";
   }
   redirect(redirectUrl);
 }
@@ -912,7 +921,7 @@ export async function moveDocItemAction(
 
 export async function updateProcedureAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/procedure?ok=1";
+  let redirectUrl = "/admin/procedure?status=saved";
   try {
     const content = await getRawContentForMutation();
     content.procedure.heading = {
@@ -938,7 +947,7 @@ export async function updateProcedureAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[updateProcedureAction] error:", err);
-    redirectUrl = "/admin/procedure?error=1";
+    redirectUrl = "/admin/procedure?status=error";
   }
 
   redirect(redirectUrl);
@@ -946,7 +955,7 @@ export async function updateProcedureAction(formData: FormData) {
 
 export async function addProcedureItemAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/procedure?ok=1";
+  let redirectUrl = "/admin/procedure?status=added";
   try {
     const content = await getRawContentForMutation();
     const ne = String(formData.get("new_item_ne") || "").trim();
@@ -957,14 +966,14 @@ export async function addProcedureItemAction(formData: FormData) {
     }
   } catch (err) {
     console.error("[addProcedureItemAction] error:", err);
-    redirectUrl = "/admin/procedure?error=1";
+    redirectUrl = "/admin/procedure?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function deleteProcedureItemAction(index: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/procedure?ok=1";
+  let redirectUrl = "/admin/procedure?status=deleted";
   try {
     const content = await getRawContentForMutation();
     if (index >= 0 && index < content.procedure.items.length) {
@@ -973,14 +982,14 @@ export async function deleteProcedureItemAction(index: number) {
     }
   } catch (err) {
     console.error("[deleteProcedureItemAction] error:", err);
-    redirectUrl = "/admin/procedure?error=1";
+    redirectUrl = "/admin/procedure?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function moveProcedureItemAction(index: number, direction: "up" | "down") {
   await requireAdmin();
-  let redirectUrl = "/admin/procedure?ok=1";
+  let redirectUrl = "/admin/procedure?status=moved";
   try {
     const content = await getRawContentForMutation();
     const targetIndex = direction === "up" ? index - 1 : index + 1;
@@ -991,7 +1000,7 @@ export async function moveProcedureItemAction(index: number, direction: "up" | "
     }
   } catch (err) {
     console.error("[moveProcedureItemAction] error:", err);
-    redirectUrl = "/admin/procedure?error=1";
+    redirectUrl = "/admin/procedure?status=error";
   }
   redirect(redirectUrl);
 }
@@ -1002,7 +1011,7 @@ export async function moveProcedureItemAction(index: number, direction: "up" | "
 
 export async function updateAboutAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/about?ok=1";
+  let redirectUrl = "/admin/about?status=saved";
   try {
     const content = await getRawContentForMutation();
     content.about.heading = {
@@ -1027,6 +1036,7 @@ export async function updateAboutAction(formData: FormData) {
     if (photoFile && photoFile.size > 0) {
       const newUrl = await uploadToBlob(photoFile, "about", content.about.photo);
       content.about.photo = newUrl;
+      redirectUrl = "/admin/about?status=uploaded";
     }
 
     // Tags
@@ -1044,7 +1054,7 @@ export async function updateAboutAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[updateAboutAction] error:", err);
-    redirectUrl = "/admin/about?error=1";
+    redirectUrl = "/admin/about?status=error";
   }
 
   redirect(redirectUrl);
@@ -1052,7 +1062,7 @@ export async function updateAboutAction(formData: FormData) {
 
 export async function addAboutTagAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/about?ok=1";
+  let redirectUrl = "/admin/about?status=added";
   try {
     const content = await getRawContentForMutation();
     const ne = String(formData.get("new_tag_ne") || "").trim();
@@ -1063,14 +1073,14 @@ export async function addAboutTagAction(formData: FormData) {
     }
   } catch (err) {
     console.error("[addAboutTagAction] error:", err);
-    redirectUrl = "/admin/about?error=1";
+    redirectUrl = "/admin/about?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function deleteAboutTagAction(index: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/about?ok=1";
+  let redirectUrl = "/admin/about?status=deleted";
   try {
     const content = await getRawContentForMutation();
     if (index >= 0 && index < content.about.tags.length) {
@@ -1079,14 +1089,14 @@ export async function deleteAboutTagAction(index: number) {
     }
   } catch (err) {
     console.error("[deleteAboutTagAction] error:", err);
-    redirectUrl = "/admin/about?error=1";
+    redirectUrl = "/admin/about?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function moveAboutTagAction(index: number, direction: "up" | "down") {
   await requireAdmin();
-  let redirectUrl = "/admin/about?ok=1";
+  let redirectUrl = "/admin/about?status=moved";
   try {
     const content = await getRawContentForMutation();
     const targetIndex = direction === "up" ? index - 1 : index + 1;
@@ -1097,7 +1107,7 @@ export async function moveAboutTagAction(index: number, direction: "up" | "down"
     }
   } catch (err) {
     console.error("[moveAboutTagAction] error:", err);
-    redirectUrl = "/admin/about?error=1";
+    redirectUrl = "/admin/about?status=error";
   }
   redirect(redirectUrl);
 }
@@ -1108,7 +1118,7 @@ export async function moveAboutTagAction(index: number, direction: "up" | "down"
 
 export async function updateGalleryAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/gallery?ok=1";
+  let redirectUrl = "/admin/gallery?status=saved";
   try {
     const content = await getRawContentForMutation();
     content.gallery.heading = {
@@ -1129,7 +1139,7 @@ export async function updateGalleryAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[updateGalleryAction] error:", err);
-    redirectUrl = "/admin/gallery?error=1";
+    redirectUrl = "/admin/gallery?status=error";
   }
 
   redirect(redirectUrl);
@@ -1137,7 +1147,7 @@ export async function updateGalleryAction(formData: FormData) {
 
 export async function addGalleryPhotosAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/gallery?ok=1";
+  let redirectUrl = "/admin/gallery?status=uploaded";
   try {
     const content = await getRawContentForMutation();
     const files = formData.getAll("photos") as File[];
@@ -1155,7 +1165,7 @@ export async function addGalleryPhotosAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[addGalleryPhotosAction] error:", err);
-    redirectUrl = "/admin/gallery?error=1";
+    redirectUrl = "/admin/gallery?status=error";
   }
 
   redirect(redirectUrl);
@@ -1163,7 +1173,7 @@ export async function addGalleryPhotosAction(formData: FormData) {
 
 export async function deleteGalleryItemAction(index: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/gallery?ok=1";
+  let redirectUrl = "/admin/gallery?status=deleted";
   try {
     const content = await getRawContentForMutation();
     if (index >= 0 && index < content.gallery.items.length) {
@@ -1173,14 +1183,14 @@ export async function deleteGalleryItemAction(index: number) {
     }
   } catch (err) {
     console.error("[deleteGalleryItemAction] error:", err);
-    redirectUrl = "/admin/gallery?error=1";
+    redirectUrl = "/admin/gallery?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function moveGalleryItemAction(index: number, direction: "up" | "down") {
   await requireAdmin();
-  let redirectUrl = "/admin/gallery?ok=1";
+  let redirectUrl = "/admin/gallery?status=moved";
   try {
     const content = await getRawContentForMutation();
     const targetIndex = direction === "up" ? index - 1 : index + 1;
@@ -1191,7 +1201,7 @@ export async function moveGalleryItemAction(index: number, direction: "up" | "do
     }
   } catch (err) {
     console.error("[moveGalleryItemAction] error:", err);
-    redirectUrl = "/admin/gallery?error=1";
+    redirectUrl = "/admin/gallery?status=error";
   }
   redirect(redirectUrl);
 }
@@ -1202,7 +1212,7 @@ export async function moveGalleryItemAction(index: number, direction: "up" | "do
 
 export async function updateLabelsAction(formData: FormData) {
   await requireAdmin();
-  let redirectUrl = "/admin/labels?ok=1";
+  let redirectUrl = "/admin/labels?status=saved";
   try {
     const content = await getRawContentForMutation();
     const uiKeys = Object.keys(content.ui) as Array<keyof typeof content.ui>;
@@ -1217,7 +1227,7 @@ export async function updateLabelsAction(formData: FormData) {
     await saveContentWithBackup(content);
   } catch (err) {
     console.error("[updateLabelsAction] error:", err);
-    redirectUrl = "/admin/labels?error=1";
+    redirectUrl = "/admin/labels?status=error";
   }
 
   redirect(redirectUrl);
@@ -1229,26 +1239,26 @@ export async function updateLabelsAction(formData: FormData) {
 
 export async function markMessageReadAction(id: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/messages?ok=1";
+  let redirectUrl = "/admin/messages?status=saved";
   try {
     const sql = getSql();
     await sql`UPDATE messages SET read = true WHERE id = ${id}`;
   } catch (err) {
     console.error("[markMessageReadAction] error:", err);
-    redirectUrl = "/admin/messages?error=1";
+    redirectUrl = "/admin/messages?status=error";
   }
   redirect(redirectUrl);
 }
 
 export async function deleteMessageAction(id: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/messages?ok=1";
+  let redirectUrl = "/admin/messages?status=deleted";
   try {
     const sql = getSql();
     await sql`DELETE FROM messages WHERE id = ${id}`;
   } catch (err) {
     console.error("[deleteMessageAction] error:", err);
-    redirectUrl = "/admin/messages?error=1";
+    redirectUrl = "/admin/messages?status=error";
   }
   redirect(redirectUrl);
 }
@@ -1260,7 +1270,7 @@ export async function deleteMessageAction(id: number) {
 export async function updateAdvancedAction(formData: FormData) {
   await requireAdmin();
   const raw = String(formData.get("rawJson") || "");
-  let redirectUrl = "/admin/advanced?ok=1";
+  let redirectUrl = "/admin/advanced?status=saved";
 
   try {
     const parsed = JSON.parse(raw);
@@ -1287,7 +1297,7 @@ export async function updateAdvancedAction(formData: FormData) {
 
 export async function restoreBackupAction(backupId: number) {
   await requireAdmin();
-  let redirectUrl = "/admin/advanced?ok=1";
+  let redirectUrl = "/admin/advanced?status=restored";
   try {
     const sql = getSql();
     const rows = (await sql`
@@ -1315,7 +1325,7 @@ export async function restoreBackupAction(backupId: number) {
       throw err;
     }
     console.error("[restoreBackupAction] error:", err);
-    redirectUrl = "/admin/advanced?error=1";
+    redirectUrl = "/admin/advanced?status=error";
   }
 
   redirect(redirectUrl);

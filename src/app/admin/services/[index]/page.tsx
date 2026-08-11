@@ -105,45 +105,36 @@ export default async function AdminServiceCategoryPage({
               </span>
               <div className="admin-item-row__actions">
                 {/* Move group up */}
-                <form
-                  action={moveServiceGroupAction.bind(null, catIndex, gi, "up")}
+                <button
+                  type="submit"
+                  formAction={moveServiceGroupAction.bind(null, catIndex, gi, "up")}
+                  disabled={gi === 0}
+                  className="admin-btn admin-btn--outline admin-btn--sm"
+                  title="समूह माथि सार्नुहोस्"
                 >
-                  <button
-                    type="submit"
-                    disabled={gi === 0}
-                    className="admin-btn admin-btn--outline admin-btn--sm"
-                    title="समूह माथि सार्नुहोस्"
-                  >
-                    ↑
-                  </button>
-                </form>
+                  ↑
+                </button>
                 {/* Move group down */}
-                <form
-                  action={moveServiceGroupAction.bind(
+                <button
+                  type="submit"
+                  formAction={moveServiceGroupAction.bind(
                     null,
                     catIndex,
                     gi,
                     "down"
                   )}
+                  disabled={gi === cat.groups.length - 1}
+                  className="admin-btn admin-btn--outline admin-btn--sm"
+                  title="समूह तल सार्नुहोस्"
                 >
-                  <button
-                    type="submit"
-                    disabled={gi === cat.groups.length - 1}
-                    className="admin-btn admin-btn--outline admin-btn--sm"
-                    title="समूह तल सार्नुहोस्"
-                  >
-                    ↓
-                  </button>
-                </form>
+                  ↓
+                </button>
                 {/* Delete group */}
-                <form
-                  action={deleteServiceGroupAction.bind(null, catIndex, gi)}
-                >
-                  <ConfirmSubmitButton
-                    label="समूह हटाउनुहोस्"
-                    confirmMessage={`समूह "${group.title.ne || `#${gi + 1}`}" र यसका सबै सेवाहरू हटाउने? (Delete group and all its items?)`}
-                  />
-                </form>
+                <ConfirmSubmitButton
+                  formAction={deleteServiceGroupAction.bind(null, catIndex, gi)}
+                  label="समूह हटाउनुहोस्"
+                  confirmMessage={`समूह "${group.title.ne || `#${gi + 1}`}" र यसका सबै सेवाहरू हटाउने? (Delete group and all its items?)`}
+                />
               </div>
             </div>
 
@@ -235,57 +226,48 @@ export default async function AdminServiceCategoryPage({
                   </span>
                   <div className="admin-item-row__actions">
                     {/* Move item up */}
-                    <form
-                      action={moveServiceItemAction.bind(
+                    <button
+                      type="submit"
+                      formAction={moveServiceItemAction.bind(
                         null,
                         catIndex,
                         gi,
                         ii,
                         "up"
                       )}
+                      disabled={ii === 0}
+                      className="admin-btn admin-btn--outline admin-btn--sm"
+                      title="माथि सार्नुहोस्"
                     >
-                      <button
-                        type="submit"
-                        disabled={ii === 0}
-                        className="admin-btn admin-btn--outline admin-btn--sm"
-                        title="माथि सार्नुहोस्"
-                      >
-                        ↑
-                      </button>
-                    </form>
+                      ↑
+                    </button>
                     {/* Move item down */}
-                    <form
-                      action={moveServiceItemAction.bind(
+                    <button
+                      type="submit"
+                      formAction={moveServiceItemAction.bind(
                         null,
                         catIndex,
                         gi,
                         ii,
                         "down"
                       )}
+                      disabled={ii === group.items.length - 1}
+                      className="admin-btn admin-btn--outline admin-btn--sm"
+                      title="तल सार्नुहोस्"
                     >
-                      <button
-                        type="submit"
-                        disabled={ii === group.items.length - 1}
-                        className="admin-btn admin-btn--outline admin-btn--sm"
-                        title="तल सार्नुहोस्"
-                      >
-                        ↓
-                      </button>
-                    </form>
+                      ↓
+                    </button>
                     {/* Delete item */}
-                    <form
-                      action={deleteServiceItemAction.bind(
+                    <ConfirmSubmitButton
+                      formAction={deleteServiceItemAction.bind(
                         null,
                         catIndex,
                         gi,
                         ii
                       )}
-                    >
-                      <ConfirmSubmitButton
-                        label="हटाउनुहोस्"
-                        confirmMessage={`सेवा #${ii + 1} (${item.ne || item.en || "Item"}) हटाउने? (Delete this service item?)`}
-                      />
-                    </form>
+                      label="हटाउनुहोस्"
+                      confirmMessage={`सेवा #${ii + 1} (${item.ne || item.en || "Item"}) हटाउने? (Delete this service item?)`}
+                    />
                   </div>
                 </div>
                 <div className="admin-bilingual-grid">
@@ -329,35 +311,34 @@ export default async function AdminServiceCategoryPage({
               >
                 यस समूहमा नयाँ सेवा थप्नुहोस् (Add Item to this Group):
               </span>
-              <form action={addServiceItemAction.bind(null, catIndex, gi)}>
-                <div
-                  className="admin-bilingual-grid"
-                  style={{ marginBottom: "8px" }}
-                >
-                  <div>
-                    <input
-                      type="text"
-                      name="new_item_ne"
-                      className="admin-input"
-                      placeholder="नयाँ सेवा (नेपाली)"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      name="new_item_en"
-                      className="admin-input"
-                      placeholder="New service (English)"
-                    />
-                  </div>
+              <div
+                className="admin-bilingual-grid"
+                style={{ marginBottom: "8px" }}
+              >
+                <div>
+                  <input
+                    type="text"
+                    name={`new_item_${gi}_ne`}
+                    className="admin-input"
+                    placeholder="नयाँ सेवा (नेपाली)"
+                  />
                 </div>
-                <button
-                  type="submit"
-                  className="admin-btn admin-btn--outline admin-btn--sm"
-                >
-                  + सेवा थप्नुहोस् (Add Item)
-                </button>
-              </form>
+                <div>
+                  <input
+                    type="text"
+                    name={`new_item_${gi}_en`}
+                    className="admin-input"
+                    placeholder="New service (English)"
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                formAction={addServiceItemAction.bind(null, catIndex, gi)}
+                className="admin-btn admin-btn--outline admin-btn--sm"
+              >
+                + सेवा थप्नुहोस् (Add Item)
+              </button>
             </div>
           </div>
         ))}

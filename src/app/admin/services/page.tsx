@@ -110,36 +110,31 @@ export default async function AdminServicesPage({ searchParams }: PageProps) {
                 </span>
                 <div className="admin-item-row__actions">
                   {/* Move up */}
-                  <form action={moveServiceCategoryAction.bind(null, ci, "up")}>
-                    <button
-                      type="submit"
-                      disabled={ci === 0}
-                      className="admin-btn admin-btn--outline admin-btn--sm"
-                      title="माथि सार्नुहोस्"
-                    >
-                      ↑ माथि
-                    </button>
-                  </form>
-                  {/* Move down */}
-                  <form
-                    action={moveServiceCategoryAction.bind(null, ci, "down")}
+                  <button
+                    type="submit"
+                    formAction={moveServiceCategoryAction.bind(null, ci, "up")}
+                    disabled={ci === 0}
+                    className="admin-btn admin-btn--outline admin-btn--sm"
+                    title="माथि सार्नुहोस्"
                   >
-                    <button
-                      type="submit"
-                      disabled={ci === s.categories.length - 1}
-                      className="admin-btn admin-btn--outline admin-btn--sm"
-                      title="तल सार्नुहोस्"
-                    >
-                      ↓ तल
-                    </button>
-                  </form>
+                    ↑ माथि
+                  </button>
+                  {/* Move down */}
+                  <button
+                    type="submit"
+                    formAction={moveServiceCategoryAction.bind(null, ci, "down")}
+                    disabled={ci === s.categories.length - 1}
+                    className="admin-btn admin-btn--outline admin-btn--sm"
+                    title="तल सार्नुहोस्"
+                  >
+                    ↓ तल
+                  </button>
                   {/* Delete */}
-                  <form action={deleteServiceCategoryAction.bind(null, ci)}>
-                    <ConfirmSubmitButton
-                      label="हटाउनुहोस् (Delete)"
-                      confirmMessage={`वर्ग "#${ci + 1}: ${cat.title.ne}" सहित यसका सबै समूह र सेवाहरू हटाउने? (Delete category and all its groups/items?)`}
-                    />
-                  </form>
+                  <ConfirmSubmitButton
+                    formAction={deleteServiceCategoryAction.bind(null, ci)}
+                    label="हटाउनुहोस् (Delete)"
+                    confirmMessage={`वर्ग "#${ci + 1}: ${cat.title.ne}" सहित यसका सबै समूह र सेवाहरू हटाउने? (Delete category and all its groups/items?)`}
+                  />
                 </div>
               </div>
 

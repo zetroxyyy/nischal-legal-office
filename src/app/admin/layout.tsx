@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import React, { Suspense } from "react";
 import { getCurrentAdmin } from "@/lib/auth";
 import { logoutAction } from "./actions";
 import MobileNav from "./components/MobileNav";
+import StatusBanner from "./components/StatusBanner";
 import "./admin.css";
 
 export const metadata: Metadata = {
@@ -88,6 +90,10 @@ export default async function AdminLayout({
         <MobileNav items={NAV_ITEMS} />
 
         <main className="admin-main">
+          <Suspense fallback={null}>
+            <StatusBanner />
+          </Suspense>
+
           {/* Password change warning banner */}
           {admin.must_change && (
             <div className="admin-banner admin-banner--warning" role="alert">

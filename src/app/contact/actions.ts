@@ -18,7 +18,7 @@ export async function submitContactFormAction(formData: FormData) {
   const renderedAtStr = String(formData.get("_t") || "");
   const renderedAt = parseInt(renderedAtStr, 10);
   const now = Date.now();
-  if (!renderedAt || isNaN(renderedAt) || now - renderedAt < 3000) {
+  if (!renderedAt || isNaN(renderedAt) || now - renderedAt < 500) {
     // Submitted too quickly (bot or spam)
     redirect("/contact?err=1#contact-form");
   }
