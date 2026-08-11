@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidateTag, updateTag, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import { put, del } from "@vercel/blob";
@@ -67,7 +67,12 @@ async function saveContentWithBackup(newContent: SiteContent) {
   `;
 
   // 3. Invalidate Next.js cache
-  revalidateTag("content", "max");
+  try {
+    updateTag("content");
+  } catch {
+    revalidateTag("content", "max");
+  }
+  revalidatePath("/", "layout");
 }
 
 /**

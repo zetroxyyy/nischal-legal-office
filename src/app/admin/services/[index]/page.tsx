@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
-import { getContent } from "@/lib/content";
+import { getUncachedContent } from "@/lib/content";
 import {
   updateServiceCategoryGroupsAction,
   addServiceGroupAction,
@@ -16,7 +16,7 @@ import ConfirmSubmitButton from "../../components/ConfirmSubmitButton";
 
 interface PageProps {
   params: Promise<{ index: string }>;
-  searchParams: Promise<{ ok?: string; error?: string }>;
+  searchParams: Promise<{ ok?: string; error?: string; status?: string }>;
 }
 
 export default async function AdminServiceCategoryPage({
@@ -25,10 +25,10 @@ export default async function AdminServiceCategoryPage({
 }: PageProps) {
   await requireAdmin();
   const { index: indexStr } = await params;
-  const { ok, error } = await searchParams;
+  const { ok, error, status } = await searchParams;
 
   const catIndex = parseInt(indexStr, 10);
-  const content = await getContent();
+  const content = await getUncachedContent();
   const cats = content.services.categories;
 
   // Guard: invalid index → redirect to overview
