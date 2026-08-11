@@ -6,7 +6,7 @@ import { getSql } from "@/lib/db";
 const SECTIONS = [
   { href: "/admin/settings", labelNe: "सेटिङहरू", labelEn: "Settings", desc: "कार्यालय विवरण, फोन, ठेगाना, सूचना ब्यानर, र SEO" },
   { href: "/admin/hero", labelNe: "मुख्य ब्यानर", labelEn: "Hero Section", desc: "शीर्षक, उप-शीर्षक, मुख्य बुँदाहरू र मुख्य तस्बिर" },
-  { href: "/admin/services", labelNe: "सेवाहरू", labelEn: "Services", desc: "तीन हैसियत: नोटरी पब्लिक, अधिवक्ता र मेलमिलापकर्ता — सम्पादन सुविधा Phase 5B मा आउँछ" },
+  { href: "/admin/services", labelNe: "सेवाहरू", labelEn: "Services", desc: "तीन वर्ग — नोटरी, कानुनी सेवा र मेलमिलाप" },
   { href: "/admin/docs", labelNe: "आवश्यक कागजात", labelEn: "Required Documents", desc: "कागजात समूहहरू, सूची र महत्त्वपूर्ण सूचना" },
   { href: "/admin/procedure", labelNe: "सेवा प्रक्रिया", labelEn: "Procedure", desc: "काम सम्पन्न हुने चरणबद्ध प्रक्रियाहरू" },
   { href: "/admin/about", labelNe: "अधिवक्ता परिचय", labelEn: "About Advocate", desc: "अधिवक्ताको नाम, पद, विस्तृत परिचय र फोटो" },

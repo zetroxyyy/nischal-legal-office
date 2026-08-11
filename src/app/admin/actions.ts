@@ -443,29 +443,313 @@ export async function moveHeroPointAction(index: number, direction: "up" | "down
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SERVICES ACTIONS (Phase 5A: services.items replaced by categories — editor
-// is being upgraded in Phase 5B. These stubs prevent crashes from stale refs.)
+// SERVICES ACTIONS — Phase 5B real editor
 // ─────────────────────────────────────────────────────────────────────────────
 
-export async function updateServicesAction(_formData: FormData) {
+/** Save services section header: heading, intro, global note */
+export async function updateServicesHeaderAction(formData: FormData) {
   await requireAdmin();
-  redirect("/admin/services?error=upgrade_in_progress");
+  let redirectUrl = "/admin/services?ok=1";
+  try {
+    const content = await getRawContentForMutation();
+    content.services.heading = {
+      ne: String(formData.get("heading_ne") || "").trim(),
+      en: String(formData.get("heading_en") || "").trim(),
+    };
+    content.services.intro = {
+      ne: String(formData.get("intro_ne") || "").trim(),
+      en: String(formData.get("intro_en") || "").trim(),
+    };
+    content.services.note = {
+      ne: String(formData.get("note_ne") || "").trim(),
+      en: String(formData.get("note_en") || "").trim(),
+    };
+    await saveContentWithBackup(content);
+  } catch (err) {
+    console.error("[updateServicesHeaderAction] error:", err);
+    redirectUrl = "/admin/services?error=1";
+  }
+  redirect(redirectUrl);
 }
 
-export async function addServiceAction(_formData: FormData) {
+/** Bulk-save category title / subtitle / note for all categories */
+export async function updateServicesCategoriesAction(formData: FormData) {
   await requireAdmin();
-  redirect("/admin/services?error=upgrade_in_progress");
+  let redirectUrl = "/admin/services?ok=1";
+  try {
+    const content = await getRawContentForMutation();
+    const count = parseInt(String(formData.get("cats_count") || "0"), 10);
+    for (let i = 0; i < count && i < content.services.categories.length; i++) {
+      content.services.categories[i].title = {
+        ne: String(formData.get(`cat_${i}_title_ne`) || "").trim(),
+        en: String(formData.get(`cat_${i}_title_en`) || "").trim(),
+      };
+      content.services.categories[i].subtitle = {
+        ne: String(formData.get(`cat_${i}_subtitle_ne`) || "").trim(),
+        en: String(formData.get(`cat_${i}_subtitle_en`) || "").trim(),
+      };
+      content.services.categories[i].note = {
+        ne: String(formData.get(`cat_${i}_note_ne`) || "").trim(),
+        en: String(formData.get(`cat_${i}_note_en`) || "").trim(),
+      };
+    }
+    await saveContentWithBackup(content);
+  } catch (err) {
+    console.error("[updateServicesCategoriesAction] error:", err);
+    redirectUrl = "/admin/services?error=1";
+  }
+  redirect(redirectUrl);
 }
 
-export async function deleteServiceAction(_index: number) {
+/** Add a new empty category */
+export async function addServiceCategoryAction(formData: FormData) {
   await requireAdmin();
-  redirect("/admin/services?error=upgrade_in_progress");
+  let redirectUrl = "/admin/services?ok=1";
+  try {
+    const content = await getRawContentForMutation();
+    const titleNe = String(formData.get("new_cat_title_ne") || "").trim();
+    const titleEn = String(formData.get("new_cat_title_en") || "").trim();
+    if (titleNe || titleEn) {
+      content.services.categories.push({
+        title: { ne: titleNe, en: titleEn },
+        subtitle: { ne: "", en: "" },
+        note: { ne: "", en: "" },
+        groups: [],
+      });
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[addServiceCategoryAction] error:", err);
+    redirectUrl = "/admin/services?error=1";
+  }
+  redirect(redirectUrl);
 }
 
-export async function moveServiceAction(_index: number, _direction: "up" | "down") {
+/** Delete a category by index */
+export async function deleteServiceCategoryAction(index: number) {
   await requireAdmin();
-  redirect("/admin/services?error=upgrade_in_progress");
+  let redirectUrl = "/admin/services?ok=1";
+  try {
+    const content = await getRawContentForMutation();
+    if (index >= 0 && index < content.services.categories.length) {
+      content.services.categories.splice(index, 1);
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[deleteServiceCategoryAction] error:", err);
+    redirectUrl = "/admin/services?error=1";
+  }
+  redirect(redirectUrl);
 }
+
+/** Move a category up or down */
+export async function moveServiceCategoryAction(index: number, direction: "up" | "down") {
+  await requireAdmin();
+  let redirectUrl = "/admin/services?ok=1";
+  try {
+    const content = await getRawContentForMutation();
+    const cats = content.services.categories;
+    const target = direction === "up" ? index - 1 : index + 1;
+    if (target >= 0 && target < cats.length) {
+      const [item] = cats.splice(index, 1);
+      cats.splice(target, 0, item);
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[moveServiceCategoryAction] error:", err);
+    redirectUrl = "/admin/services?error=1";
+  }
+  redirect(redirectUrl);
+}
+
+/** Page 2: save all group titles + all items text for one category */
+export async function updateServiceCategoryGroupsAction(
+  catIndex: number,
+  formData: FormData
+) {
+  await requireAdmin();
+  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  try {
+    const content = await getRawContentForMutation();
+    const cats = content.services.categories;
+    if (catIndex < 0 || catIndex >= cats.length) {
+      redirectUrl = "/admin/services?error=1";
+    } else {
+      const groupCount = parseInt(String(formData.get("groups_count") || "0"), 10);
+      for (let gi = 0; gi < groupCount && gi < cats[catIndex].groups.length; gi++) {
+        cats[catIndex].groups[gi].title = {
+          ne: String(formData.get(`group_${gi}_title_ne`) || "").trim(),
+          en: String(formData.get(`group_${gi}_title_en`) || "").trim(),
+        };
+        const itemCount = parseInt(
+          String(formData.get(`group_${gi}_items_count`) || "0"),
+          10
+        );
+        for (
+          let ii = 0;
+          ii < itemCount && ii < cats[catIndex].groups[gi].items.length;
+          ii++
+        ) {
+          cats[catIndex].groups[gi].items[ii] = {
+            ne: String(formData.get(`group_${gi}_item_${ii}_ne`) || "").trim(),
+            en: String(formData.get(`group_${gi}_item_${ii}_en`) || "").trim(),
+          };
+        }
+      }
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[updateServiceCategoryGroupsAction] error:", err);
+    redirectUrl = `/admin/services/${catIndex}?error=1`;
+  }
+  redirect(redirectUrl);
+}
+
+/** Add a new empty group to a category */
+export async function addServiceGroupAction(catIndex: number, formData: FormData) {
+  await requireAdmin();
+  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  try {
+    const content = await getRawContentForMutation();
+    const cats = content.services.categories;
+    if (catIndex >= 0 && catIndex < cats.length) {
+      const titleNe = String(formData.get("new_group_title_ne") || "").trim();
+      const titleEn = String(formData.get("new_group_title_en") || "").trim();
+      cats[catIndex].groups.push({
+        title: { ne: titleNe, en: titleEn },
+        items: [],
+      });
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[addServiceGroupAction] error:", err);
+    redirectUrl = `/admin/services/${catIndex}?error=1`;
+  }
+  redirect(redirectUrl);
+}
+
+/** Delete a group from a category */
+export async function deleteServiceGroupAction(catIndex: number, groupIndex: number) {
+  await requireAdmin();
+  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  try {
+    const content = await getRawContentForMutation();
+    const cats = content.services.categories;
+    if (
+      catIndex >= 0 &&
+      catIndex < cats.length &&
+      groupIndex >= 0 &&
+      groupIndex < cats[catIndex].groups.length
+    ) {
+      cats[catIndex].groups.splice(groupIndex, 1);
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[deleteServiceGroupAction] error:", err);
+    redirectUrl = `/admin/services/${catIndex}?error=1`;
+  }
+  redirect(redirectUrl);
+}
+
+/** Move a group up or down within a category */
+export async function moveServiceGroupAction(
+  catIndex: number,
+  groupIndex: number,
+  direction: "up" | "down"
+) {
+  await requireAdmin();
+  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  try {
+    const content = await getRawContentForMutation();
+    const groups = content.services.categories[catIndex]?.groups;
+    if (!groups) throw new Error("category not found");
+    const target = direction === "up" ? groupIndex - 1 : groupIndex + 1;
+    if (target >= 0 && target < groups.length) {
+      const [item] = groups.splice(groupIndex, 1);
+      groups.splice(target, 0, item);
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[moveServiceGroupAction] error:", err);
+    redirectUrl = `/admin/services/${catIndex}?error=1`;
+  }
+  redirect(redirectUrl);
+}
+
+/** Add an item to a group */
+export async function addServiceItemAction(
+  catIndex: number,
+  groupIndex: number,
+  formData: FormData
+) {
+  await requireAdmin();
+  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  try {
+    const content = await getRawContentForMutation();
+    const group = content.services.categories[catIndex]?.groups[groupIndex];
+    if (!group) throw new Error("group not found");
+    const ne = String(formData.get("new_item_ne") || "").trim();
+    const en = String(formData.get("new_item_en") || "").trim();
+    if (ne || en) {
+      group.items.push({ ne, en });
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[addServiceItemAction] error:", err);
+    redirectUrl = `/admin/services/${catIndex}?error=1`;
+  }
+  redirect(redirectUrl);
+}
+
+/** Delete an item from a group */
+export async function deleteServiceItemAction(
+  catIndex: number,
+  groupIndex: number,
+  itemIndex: number
+) {
+  await requireAdmin();
+  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  try {
+    const content = await getRawContentForMutation();
+    const items = content.services.categories[catIndex]?.groups[groupIndex]?.items;
+    if (!items) throw new Error("group/items not found");
+    if (itemIndex >= 0 && itemIndex < items.length) {
+      items.splice(itemIndex, 1);
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[deleteServiceItemAction] error:", err);
+    redirectUrl = `/admin/services/${catIndex}?error=1`;
+  }
+  redirect(redirectUrl);
+}
+
+/** Move an item up or down within a group */
+export async function moveServiceItemAction(
+  catIndex: number,
+  groupIndex: number,
+  itemIndex: number,
+  direction: "up" | "down"
+) {
+  await requireAdmin();
+  let redirectUrl = `/admin/services/${catIndex}?ok=1`;
+  try {
+    const content = await getRawContentForMutation();
+    const items = content.services.categories[catIndex]?.groups[groupIndex]?.items;
+    if (!items) throw new Error("group/items not found");
+    const target = direction === "up" ? itemIndex - 1 : itemIndex + 1;
+    if (target >= 0 && target < items.length) {
+      const [item] = items.splice(itemIndex, 1);
+      items.splice(target, 0, item);
+      await saveContentWithBackup(content);
+    }
+  } catch (err) {
+    console.error("[moveServiceItemAction] error:", err);
+    redirectUrl = `/admin/services/${catIndex}?error=1`;
+  }
+  redirect(redirectUrl);
+}
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DOCS ACTIONS
