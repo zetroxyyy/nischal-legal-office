@@ -48,53 +48,97 @@ export default async function ServicesPage() {
         <div className="container">
           {services.categories.map((cat, ci) => {
             const catNote = t(cat.note, lang);
+
+            // The procedure block (translation & notary request notes) relates specifically
+            // to the Notary Public category (index 0), so we render it immediately after
+            // that first category — before the remaining categories continue.
+            const renderProcedureHere = ci === 0;
+
             return (
-              <div key={ci} className="services-category-section">
-                {/* Category heading — bilingual board-lockup style */}
-                <div className="lockup">
-                  <h2 className="lockup__heading">{t(cat.title, lang)}</h2>
-                  <p className="lockup__sub">{t2(cat.title, lang)}</p>
-                  <div className="lockup__rule"></div>
-                </div>
-                {/* Category subtitle in blue */}
-                <p className="services-category-subtitle">{t(cat.subtitle, lang)}</p>
-
-                {/* Groups */}
-                {cat.groups.map((group, gi) => {
-                  const groupTitle = t(group.title, lang).trim();
-                  return (
-                    <div key={gi} className="services-group">
-                      {/* Red band header — only if group title is non-empty */}
-                      {groupTitle && (
-                        <div className="doc-card__header services-group__band">
-                          <h3 className="doc-card__title">{groupTitle}</h3>
-                        </div>
-                      )}
-                      <ol className="services-items-list" aria-label={groupTitle || t(cat.title, lang)}>
-                        {group.items.map((item, ii) => (
-                          <li key={ii}>
-                            <span className="services-list__num" aria-hidden="true">
-                              {nd(String(ii + 1), lang)}
-                            </span>
-                            <span>{t(item, lang)}</span>
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  );
-                })}
-
-                {/* Category note — 3px red left border panel, only if non-empty */}
-                {catNote && (
-                  <div className="disclaimer services-cat-note" role="note">
-                    {catNote}
+              <>
+                <div key={ci} className="services-category-section">
+                  {/* Category heading — bilingual board-lockup style */}
+                  <div className="lockup">
+                    <h2 className="lockup__heading">{t(cat.title, lang)}</h2>
+                    <p className="lockup__sub">{t2(cat.title, lang)}</p>
+                    <div className="lockup__rule"></div>
                   </div>
+                  {/* Category subtitle in blue */}
+                  <p className="services-category-subtitle">{t(cat.subtitle, lang)}</p>
+
+                  {/* Groups */}
+                  {cat.groups.map((group, gi) => {
+                    const groupTitle = t(group.title, lang).trim();
+                    return (
+                      <div key={gi} className="services-group">
+                        {/* Red band header — only if group title is non-empty */}
+                        {groupTitle && (
+                          <div className="doc-card__header services-group__band">
+                            <h3 className="doc-card__title">{groupTitle}</h3>
+                          </div>
+                        )}
+                        <ol className="services-items-list" aria-label={groupTitle || t(cat.title, lang)}>
+                          {group.items.map((item, ii) => (
+                            <li key={ii}>
+                              <span className="services-list__num" aria-hidden="true">
+                                {nd(String(ii + 1), lang)}
+                              </span>
+                              <span>{t(item, lang)}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    );
+                  })}
+
+                  {/* Category note — split on \n\n and render as separate paragraphs;
+                      only rendered if non-empty */}
+                  {catNote && (
+                    <div className="disclaimer services-cat-note" role="note">
+                      {catNote.split("\n\n").map((para, pi) => (
+                        <p key={pi} style={{ margin: pi > 0 ? "1em 0 0" : "0" }}>{para}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* ── PROCEDURE ─────────────────────────────────────────────────── *
+                  * Rendered immediately after category 0 (Notary Public) because   *
+                  * this block (अनुवाद तथा नोटरी सेवा — अनुरोध) describes the      *
+                  * request/intake process specific to notary & translation work.    *
+                  * ──────────────────────────────────────────────────────────────── */}
+                {renderProcedureHere && (
+                  <section style={{ marginBottom: "48px" }}>
+                    <div className="lockup">
+                      <h2 className="lockup__heading">{t(procedure.heading, lang)}</h2>
+                      <p className="lockup__sub">{t2(procedure.heading, lang)}</p>
+                      <div className="lockup__rule"></div>
+                    </div>
+                    <p style={{ marginBottom: "32px", color: "var(--muted)", maxWidth: "680px" }}>
+                      {t(procedure.intro, lang)}
+                    </p>
+
+                    <div className="board-frame">
+                      <div className="procedure-panel">
+                        <ol className="procedure-list" aria-label={t(procedure.heading, lang)}>
+                          {procedure.items.map((item, i) => (
+                            <li key={i}>
+                              <span className="proc-num" aria-hidden="true">
+                                {nd(String(i + 1), lang)}
+                              </span>
+                              <span>{t(item, lang)}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  </section>
                 )}
-              </div>
+              </>
             );
           })}
 
-          {/* Global services.note — board-framed panel */}
+          {/* Global services.note — board-framed panel; only if non-empty */}
           {t(services.note, lang) && (
             <div className="board-frame services-global-note" role="note">
               <p style={{ margin: 0, lineHeight: 1.7, fontSize: "0.9375rem" }}>
@@ -144,35 +188,6 @@ export default async function ServicesPage() {
           {/* Legal disclaimer */}
           <div className="disclaimer" role="note" aria-label={lang === "ne" ? "महत्त्वपूर्ण सूचना" : "Important notice"}>
             {t(docs.note, lang)}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PROCEDURE ─────────────────────────────────────────────────────── */}
-      <section>
-        <div className="container">
-          <div className="lockup">
-            <h2 className="lockup__heading">{t(procedure.heading, lang)}</h2>
-            <p className="lockup__sub">{t2(procedure.heading, lang)}</p>
-            <div className="lockup__rule"></div>
-          </div>
-          <p style={{ marginBottom: "32px", color: "var(--muted)", maxWidth: "680px" }}>
-            {t(procedure.intro, lang)}
-          </p>
-
-          <div className="board-frame">
-            <div className="procedure-panel">
-              <ol className="procedure-list" aria-label={t(procedure.heading, lang)}>
-                {procedure.items.map((item, i) => (
-                  <li key={i}>
-                    <span className="proc-num" aria-hidden="true">
-                      {nd(String(i + 1), lang)}
-                    </span>
-                    <span>{t(item, lang)}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
           </div>
         </div>
       </section>

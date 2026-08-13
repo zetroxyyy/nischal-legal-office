@@ -286,12 +286,12 @@ export async function updateSettingsAction(formData: FormData) {
       },
       phone: String(formData.get("phone") || "").trim(),
       mobile: String(formData.get("mobile") || "").trim(),
-      // mobile2 is optional: use form value if present, otherwise keep stored value
-      // Never wipe a stored mobile2 due to a missing form field
-      mobile2: (() => {
-        const v = String(formData.get("mobile2") ?? "").trim();
-        return v !== "" ? v : (content.settings.mobile2 ?? "");
-      })(),
+      // mobile2 is optional. If the form field is present (even as an empty string),
+      // its submitted value wins — an intentional clear must be honoured.
+      // Only fall back to the stored value if the key is genuinely absent from the form.
+      mobile2: formData.has("mobile2")
+        ? String(formData.get("mobile2") ?? "").trim()
+        : (content.settings.mobile2 ?? ""),
       email: String(formData.get("email") || "").trim(),
       whatsapp: String(formData.get("whatsapp") || "").trim(),
       hours: {

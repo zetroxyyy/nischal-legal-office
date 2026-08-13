@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd } from "@/lib/lang";
 import { telHref, waHref } from "@/lib/phone";
 import { submitContactFormAction } from "./actions";
+import GalleryLightbox from "./GalleryLightbox";
 
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
@@ -276,33 +276,13 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             <p className="lockup__sub">{t2(gallery.heading, lang)}</p>
             <div className="lockup__rule"></div>
           </div>
-          <div className="gallery-grid">
-            {gallery.items.map((item, i) => (
-              <figure key={i}>
-                <Image
-                  src={item.image}
-                  alt={t(item.caption, lang)}
-                  width={600}
-                  height={420}
-                  loading="lazy"
-                  style={{ width: "100%", height: "240px", objectFit: "cover", display: "block" }}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <figcaption
-                  style={{
-                    padding: "8px 12px",
-                    fontSize: "0.8125rem",
-                    color: "var(--muted)",
-                    fontStyle: "italic",
-                    background: "var(--panel)",
-                    borderTop: "1px solid var(--line)",
-                  }}
-                >
-                  {t(item.caption, lang)}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <GalleryLightbox
+            gridLabel={t(gallery.heading, lang)}
+            items={gallery.items.map((item) => ({
+              image: item.image,
+              caption: t(item.caption, lang),
+            }))}
+          />
         </div>
       </section>
     </>

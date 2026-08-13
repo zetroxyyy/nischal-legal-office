@@ -4,7 +4,7 @@
     "siteSub": { "ne": "आधिकारिक नोटरी पब्लिकको कार्यालय", "en": "Office of Nepal Notary Public" },
     "phone": "056-493487",
     "mobile": "9855054592",
-    "mobile2": "9855054592",
+    "mobile2": "",
     "whatsapp": "9779855054592",
     "email": "nischallegalservice@gmail.com",
     "esewa": { "ne": "eSewa: ९८५५०५४५९२ (Nischal Legal Service)", "en": "eSewa: 9855054592 (Nischal Legal Service)" },
@@ -93,7 +93,7 @@
               },
               {
                 "ne": "निवेदन, अदालती कागजात, सम्झौता पत्र, करारनामा, विधान, प्रबन्धपत्र एवं नियमावली जस्ता कागजातहरू",
-                "en": "Applications, court documents, agreements, contracts, statutes, memoranda of association and rules"
+                "en": "Applications, court documents, agreements, contracts, statutes, Memorandum of Association (MA) and Memorandum of Articles (AA), etc."
               }
             ]
           },
@@ -121,8 +121,8 @@
           }
         ],
         "note": {
-          "ne": "नोटरी पब्लिकतर्फको सेवाको दस्तुर नोटरी पब्लिक सम्बन्धी (सातौँ संशोधन) नियमावली, २०८३ एवं सम्बन्धित निर्देशन बमोजिम हुनेछ ।",
-          "en": "Fees for notary public services are as prescribed by the Notary Public (Seventh Amendment) Rules, 2083 and the related directives."
+          "ne": "नोटरी पब्लिकतर्फको सेवाको दस्तुर नोटरी पब्लिक सम्बन्धी (सातौँ संशोधन) नियमावली, २०८३ एवं सम्बन्धित निर्देशन बमोजिम हुनेछ ।\n\nनोट: गलत नियतले वा गलत कागजात पेस गरी कुनै कागजात बनाइएमा त्यसको सम्पूर्ण जिम्मेवारी एवं दायित्व सम्बन्धित व्यक्ति स्वयंले लिनुपर्नेछ । साथै कम्प्युटर टाइपमा फरक परेमा सक्कल कागजात देखाई सच्याउनुहोला ।",
+          "en": "Fees for notary public services are as prescribed by the Notary Public (Seventh Amendment) Rules, 2083 and the related directives.\n\nNote: if any document is prepared on the basis of false papers or with wrongful intent, full responsibility and liability rests with the person concerned. If there is any typing error, please bring the original document to have it corrected."
         }
       },
       {
@@ -137,7 +137,7 @@
             "items": [
               {
                 "ne": "फिराद पत्र, प्रतिउत्तर पत्र, साक्षी बकपत्र तथा पुनरावेदन पत्र तयारी",
-                "en": "Preparation of plaints, written replies, witness depositions and appeal petitions"
+                "en": "Preparation of plaintiff paper, rejoinder paper, witness deposition and appeal paper"
               },
               {
                 "ne": "सबै तहका अदालतमा बहस पैरवी",
@@ -194,7 +194,7 @@
         ],
         "note": {
           "ne": "असहाय एवं आर्थिक रूपमा कमजोर व्यक्तिहरूका लागि निःशुल्क कानुनी सेवा उपलब्ध छ ।",
-          "en": "Free legal service is available for destitute and economically weak persons."
+          "en": "Free legal service for the helpless and economically weak person."
         }
       },
       {
@@ -221,10 +221,7 @@
         "note": { "ne": "", "en": "" }
       }
     ],
-    "note": {
-      "ne": "नोट: गलत नियतले वा गलत कागजात पेस गरी कुनै कागजात बनाइएमा त्यसको सम्पूर्ण जिम्मेवारी एवं दायित्व सम्बन्धित व्यक्ति स्वयंले लिनुपर्नेछ । साथै कम्प्युटर टाइपमा फरक परेमा सक्कल कागजात देखाई सच्याउनुहोला ।",
-      "en": "Note: if any document is prepared on the basis of false papers or with wrongful intent, full responsibility and liability rests with the person concerned. If there is any typing error, please bring the original document to have it corrected."
-    }
+    "note": { "ne": "", "en": "" }
   },
 
   "docs": {
