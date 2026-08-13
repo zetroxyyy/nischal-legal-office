@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import { getContent } from "@/lib/content";
 import { getLang, t, t2, nd } from "@/lib/lang";
 
@@ -55,8 +56,8 @@ export default async function ServicesPage() {
             const renderProcedureHere = ci === 0;
 
             return (
-              <>
-                <div key={ci} className="services-category-section">
+              <Fragment key={ci}>
+                <div className="services-category-section">
                   {/* Category heading — bilingual board-lockup style */}
                   <div className="lockup">
                     <h2 className="lockup__heading">{t(cat.title, lang)}</h2>
@@ -108,7 +109,7 @@ export default async function ServicesPage() {
                   * request/intake process specific to notary & translation work.    *
                   * ──────────────────────────────────────────────────────────────── */}
                 {renderProcedureHere && (
-                  <section style={{ marginBottom: "48px" }}>
+                  <section key="procedure" style={{ marginBottom: "48px" }}>
                     <div className="lockup">
                       <h2 className="lockup__heading">{t(procedure.heading, lang)}</h2>
                       <p className="lockup__sub">{t2(procedure.heading, lang)}</p>
@@ -134,7 +135,7 @@ export default async function ServicesPage() {
                     </div>
                   </section>
                 )}
-              </>
+              </Fragment>
             );
           })}
 

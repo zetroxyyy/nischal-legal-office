@@ -160,14 +160,17 @@ export default async function HomePage() {
           <div className="gallery-strip">
             {galleryFirst4.map((item, i) => (
               <figure key={i}>
-                <Image
-                  src={item.image}
-                  alt={t(item.caption, lang)}
-                  width={400}
-                  height={280}
-                  style={{ width: "100%", height: "180px", objectFit: "cover", display: "block" }}
-                  sizes="(max-width: 760px) 50vw, 25vw"
-                />
+                {/* Link through to the full gallery lightbox on /contact */}
+                <a href="/contact#gallery" tabIndex={-1} aria-hidden="true">
+                  <Image
+                    src={item.image}
+                    alt={t(item.caption, lang)}
+                    width={400}
+                    height={280}
+                    style={{ width: "100%", height: "180px", objectFit: "cover", display: "block" }}
+                    sizes="(max-width: 760px) 50vw, 25vw"
+                  />
+                </a>
                 <figcaption>{t(item.caption, lang)}</figcaption>
               </figure>
             ))}

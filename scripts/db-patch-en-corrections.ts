@@ -58,10 +58,14 @@ async function patch() {
   let changed = 0;
 
   // --- Correction 1: categories[1].groups[0].items[0].en ---
-  const OLD_1 = "Preparation of plaints, written replies, witness depositions and appeal petitions";
+  // Two possible old-form spellings (one from seed, one from a previous partial patch)
+  const OLD_1_FORMS = [
+    "Preparation of plaints, written replies, witness depositions and appeal petitions",
+    "Preparation of plaint paper, rejoinder paper, witness deposition and appeal paper",
+  ];
   const NEW_1 = "Preparation of plaintiff paper, rejoinder paper, witness deposition and appeal paper";
   const item1 = data.services?.categories?.[1]?.groups?.[0]?.items?.[0];
-  if (item1 && item1.en === OLD_1) {
+  if (item1 && OLD_1_FORMS.includes(item1.en)) {
     item1.en = NEW_1;
     console.log("[db:patch-en] ✓ Correction 1 applied: plaints → plaintiff paper");
     changed++;
