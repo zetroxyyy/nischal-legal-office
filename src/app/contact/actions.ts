@@ -40,7 +40,10 @@ export async function submitContactFormAction(formData: FormData) {
   const forwarded = headerList.get("x-forwarded-for");
   const realIp = headerList.get("x-real-ip");
   const clientIp = (forwarded ? forwarded.split(",")[0].trim() : realIp) || "127.0.0.1";
-  const authSecret = process.env.AUTH_SECRET || "nischal-contact-salt";
+  const authSecret = process.env.AUTH_SECRET;
+  if (!authSecret) {
+    throw new Error("[contact] AUTH_SECRET environment variable is missing or empty.");
+  }
   const ipHash = crypto.createHmac("sha256", authSecret).update(clientIp).digest("hex");
 
   try {

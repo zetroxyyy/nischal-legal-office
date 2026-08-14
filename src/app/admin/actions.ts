@@ -147,12 +147,17 @@ async function uploadToBlob(file: File, section: string, oldUrl?: string): Promi
   // Validate magic bytes (JPEG, PNG, WebP only; rejects SVG explicitly)
   await validateImageMagicBytes(file);
 
+  const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!blobToken) {
+    throw new Error("[blob] BLOB_READ_WRITE_TOKEN environment variable is missing.");
+  }
+
   const sanitized = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
   const pathname = `site/${section}/${Date.now()}-${sanitized}`;
 
   const blob = await put(pathname, file, {
     access: "public",
-    token: process.env.BLOB_READ_WRITE_TOKEN,
+    token: blobToken,
   });
 
   // Try to delete old blob if replacing
