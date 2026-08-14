@@ -93,6 +93,45 @@ async function safeDeleteBlob(url?: string | null) {
 }
 
 /**
+ * Validate image file magic bytes:
+ * - JPEG: FF D8 FF
+ * - PNG: 89 50 4E 47
+ * - WebP: RIFF (bytes 0-3) ... WEBP (bytes 8-11)
+ * Explicitly rejects SVG and all other non-image formats.
+ */
+async function validateImageMagicBytes(file: File): Promise<void> {
+  const lowerName = file.name.toLowerCase();
+  const lowerType = file.type.toLowerCase();
+
+  // Explicit SVG rejection
+  if (lowerName.endsWith(".svg") || lowerType.includes("svg")) {
+    throw new Error("SVG फाइलहरू सुरक्षाका लागि स्वीकार्य छैनन् (SVG files are explicitly rejected)");
+  }
+
+  if (file.size < 12) {
+    throw new Error("फाइल धेरै सानो छ (File is too small to be a valid image)");
+  }
+
+  const headerSlice = await file.slice(0, 16).arrayBuffer();
+  const bytes = new Uint8Array(headerSlice);
+
+  // JPEG: FF D8 FF
+  const isJpeg = bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF;
+
+  // PNG: 89 50 4E 47
+  const isPng = bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47;
+
+  // WebP: RIFF (0-3) ... WEBP (8-11)
+  const isWebp =
+    bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x46 && // 'RIFF'
+    bytes[8] === 0x57 && bytes[9] === 0x45 && bytes[10] === 0x42 && bytes[11] === 0x50;   // 'WEBP'
+
+  if (!isJpeg && !isPng && !isWebp) {
+    throw new Error("तस्बिर JPEG, PNG वा WEBP मात्र हुनुपर्छ (File failed magic-byte validation: must be JPEG, PNG, or WebP)");
+  }
+}
+
+/**
  * Helper to upload image to Vercel Blob.
  */
 async function uploadToBlob(file: File, section: string, oldUrl?: string): Promise<string> {
@@ -100,16 +139,13 @@ async function uploadToBlob(file: File, section: string, oldUrl?: string): Promi
     throw new Error("तस्बिर फाइल खाली छ (Empty file)");
   }
 
-  // Validate type
-  const validTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
-  if (!validTypes.includes(file.type)) {
-    throw new Error("तस्बिर JPEG, PNG वा WEBP मात्र हुनुपर्छ (Invalid file type)");
-  }
-
   // Validate size <= 8MB
   if (file.size > 8 * 1024 * 1024) {
     throw new Error("तस्बिर ८ MB भन्दा सानो हुनुपर्छ (File size must be <= 8MB)");
   }
+
+  // Validate magic bytes (JPEG, PNG, WebP only; rejects SVG explicitly)
+  await validateImageMagicBytes(file);
 
   const sanitized = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
   const pathname = `site/${section}/${Date.now()}-${sanitized}`;
@@ -1156,15 +1192,19 @@ export async function addGalleryPhotosAction(formData: FormData) {
   try {
     const content = await getRawContentForMutation();
     const files = formData.getAll("photos") as File[];
+    const validFiles = files.filter((f) => f && f.size > 0);
 
-    for (const file of files) {
-      if (file && file.size > 0) {
-        const url = await uploadToBlob(file, "gallery");
-        content.gallery.items.push({
-          image: url,
-          caption: { ne: "", en: "" },
-        });
-      }
+    // Cap at 10 files per request
+    if (validFiles.length > 10) {
+      throw new Error("एक पटकमा अधिकतम १० वटा फोटो मात्र अपलोड गर्न सकिन्छ (Maximum 10 files per upload request)");
+    }
+
+    for (const file of validFiles) {
+      const url = await uploadToBlob(file, "gallery");
+      content.gallery.items.push({
+        image: url,
+        caption: { ne: "", en: "" },
+      });
     }
 
     await saveContentWithBackup(content);

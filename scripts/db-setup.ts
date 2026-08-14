@@ -77,6 +77,19 @@ async function setup() {
   `;
   console.log("[db:setup] ✓ Table site_content_backups ready");
 
+  await sql`
+    CREATE TABLE IF NOT EXISTS contact_submissions_log (
+      id          SERIAL PRIMARY KEY,
+      ip_hash     VARCHAR(64) NOT NULL,
+      created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  await sql`
+    CREATE INDEX IF NOT EXISTS idx_contact_submissions_ip_time
+      ON contact_submissions_log (ip_hash, created_at)
+  `;
+  console.log("[db:setup] ✓ Table contact_submissions_log ready");
+
   // Check if admin_users is empty, if so insert default admin
   const existingAdmins = await sql`SELECT id FROM admin_users LIMIT 1`;
   if (existingAdmins.length === 0) {
