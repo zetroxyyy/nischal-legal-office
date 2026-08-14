@@ -308,7 +308,7 @@
     "heading": { "ne": "अधिवक्ताको परिचय", "en": "About the advocate" },
     "name": { "ne": "हरि बहादुर मैनाली (एल.एल.एम.)", "en": "Hari Bdr. Mainali (LLM)" },
     "roles": { "ne": "अधिवक्ता · नोटरी पब्लिक · मध्यस्थकर्ता · आधिकारिक मान्यताप्राप्त अनुवादक", "en": "Advocate · Notary Public · Mediator · Authorised Translator" },
-    "body": { "ne": "हरि बहादुर मैनाली (एल.एल.एम.) निश्चल कानूनी कार्यालय तथा नेपाल नोटरी पब्लिकको कार्यालय, भरतपुर सञ्चालन गर्नुहुन्छ । उहाँ अधिवक्ता, नोटरी पब्लिक तथा मध्यस्थकर्ताका रूपमा कार्यरत हुनुहुन्छ र नेपाली–English आधिकारिक अनुवादकका रूपमा मान्यताप्राप्त हुनुहुन्छ ।\n\nदेवानी, फौजदारी तथा कम्पनीसम्बन्धी मुद्दा, कागजातको आधिकारिक अनुवाद र नोटरी प्रमाणीकरण, सम्झौता–करारनामा एवं कम्पनी दर्तासम्बन्धी काममा कार्यालयले सेवाग्राहीलाई सरल र भरपर्दो सेवा दिँदै आएको छ । कानुनी परामर्श निःशुल्क छ ।", "en": "Hari Bdr. Mainali (LLM) runs Nischal Legal Office and the Office of Nepal Notary Public in Bharatpur. He practises as an advocate, notary public and mediator, and is an authorised Nepali–English translator.\n\nThe office provides straightforward, dependable service in civil, criminal and company cases, official document translation and notarisation, agreements and contracts, and company registration work. Legal consultation is free." },
+    "body": { "ne": "हरि बहादुर मैनाली (एल.एल.एम.) निश्चल कानूनी कार्यालय तथा नेपाल नोटरी पब्लिकको कार्यालय, भरतपुर, चितवनमा सञ्चालन गर्नुहुन्छ । उहाँ अधिवक्ता, नोटरी पब्लिक तथा मध्यस्थकर्ताका रूपमा कार्यरत हुनुहुन्छ र नेपाली–English आधिकारिक अनुवादकका रूपमा मान्यताप्राप्त हुनुहुन्छ ।\n\nदेवानी, फौजदारी तथा कम्पनीसम्बन्धी मुद्दा, कागजातको आधिकारिक अनुवाद र नोटरी प्रमाणीकरण, सम्झौता–करारनामा एवं कम्पनी दर्तासम्बन्धी काममा कार्यालयले सेवाग्राहीलाई सरल र भरपर्दो सेवा दिँदै आएको छ । कानुनी परामर्श निःशुल्क छ ।", "en": "Hari Bdr. Mainali (LLM) runs Nischal Legal Office and the Office of Nepal Notary Public in Bharatpur, Chitwan. He practises as an advocate, notary public and mediator, and is an authorised Nepali–English translator.\n\nThe office provides straightforward, dependable service in civil, criminal and company cases, official document translation and notarisation, agreements and contracts, and company registration work. Legal consultation is free." },
     "photo": "/images/advocate-hari-mainali.jpg",
     "tags": [
       { "ne": "एल.एल.एम.", "en": "LLM" },
@@ -334,7 +334,8 @@
       { "image": "/images/entrance-signboard.jpg", "caption": { "ne": "सेवा कक्षतर्फको बोर्ड", "en": "Board at the service counter" } },
       { "image": "/images/office-front-gate.jpg", "caption": { "ne": "मूल गेटबाट देखिने कार्यालय", "en": "The office from the main gate" } },
       { "image": "/images/location-sketch-map.jpg", "caption": { "ne": "कार्यालयसम्म पुग्ने नक्सा", "en": "Sketch map to the office" } },
-      { "image": "/images/business-card.jpg", "caption": { "ne": "कार्यालयको भिजिटिङ कार्ड", "en": "Office visiting card" } }
+      { "image": "/images/business-card.jpg", "caption": { "ne": "कार्यालयको भिजिटिङ कार्ड", "en": "Office visiting card" } },
+      { "image": "/images/advocate-hari-mainali.jpg", "caption": { "ne": "अधिवक्ता हरि ब. मैनाली", "en": "Advocate Hari Bdr. Mainali" } }
     ]
   },
 

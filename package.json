@@ -14,7 +14,8 @@
     "db:merge": "tsx scripts/db-merge-keys.ts",
     "db:migrate-services": "tsx scripts/db-migrate-services.ts",
     "db:move-note": "tsx scripts/db-move-note.ts",
-    "db:patch-en": "tsx scripts/db-patch-en-corrections.ts"
+    "db:patch-en": "tsx scripts/db-patch-en-corrections.ts",
+    "db:client-updates": "tsx scripts/db-client-updates.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

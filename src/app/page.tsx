@@ -43,6 +43,17 @@ export default async function HomePage() {
                 >
                   {t(ui.call, lang)}
                 </a>
+                {Boolean(settings.whatsapp?.trim()) && (
+                  <a
+                    href={waHref(settings.whatsapp)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                    id="hero-whatsapp-btn"
+                  >
+                    {t(ui.whatsapp, lang)}
+                  </a>
+                )}
                 <a
                   href={settings.mapLink}
                   target="_blank"
