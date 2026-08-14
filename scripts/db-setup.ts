@@ -1,7 +1,7 @@
 /**
  * scripts/db-setup.ts
  *
- * Creates the database tables required for Nischal Legal Office.
+ * Creates the database tables required for Nischal Legal Service.
  * Run with: npm run db:setup
  *
  * Tables created (IF NOT EXISTS):

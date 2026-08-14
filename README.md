@@ -1,4 +1,4 @@
-# Nischal Legal Office
+# Nischal Legal Service
 
 [https://nischal-legal-office.vercel.app](https://nischal-legal-office.vercel.app)
 
@@ -11,7 +11,7 @@
 
 ## Overview
 
-This application is a production-grade bilingual web presence built for Nischal Legal Office (निस्चल लीगल अफिस), paired with a custom-built, purpose-built Content Management System (CMS). Unlike generic website templates or heavy third-party monoliths like WordPress, this system was engineered specifically so non-technical legal office personnel can manage every section of their digital presence—including hero banners, practice areas, court procedures, gallery photos, contact details, and bilingual interface labels—directly from an intuitive administration interface without developer assistance.
+This application is a production-grade bilingual web presence built for Nischal Legal Service (निस्चल लीगल अफिस), paired with a custom-built, purpose-built Content Management System (CMS). Unlike generic website templates or heavy third-party monoliths like WordPress, this system was engineered specifically so non-technical legal office personnel can manage every section of their digital presence—including hero banners, practice areas, court procedures, gallery photos, contact details, and bilingual interface labels—directly from an intuitive administration interface without developer assistance.
 
 The platform is powered by Next.js 16 App Router, React 19, and Neon serverless Postgres. Content edits made inside the custom `/admin` control panel perform atomic JSONB database mutations and trigger immediate Next.js on-demand cache tag revalidations (`updateTag("content")`). Media uploads (hero images, gallery photos, service graphics) stream directly to Vercel Blob storage, automatically purging replaced files to maintain a lean storage footprint.
 

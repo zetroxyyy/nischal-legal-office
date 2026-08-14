@@ -76,8 +76,8 @@ export default async function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: "निश्चल कानूनी कार्यालय",
-    alternateName: "Nischal Legal Office — Office of Nepal Notary Public",
+    name: settings.siteName?.ne || "निश्चल कानूनी कार्यालय",
+    alternateName: `${settings.siteName?.en || "Nischal Legal Service"} — ${settings.siteSub?.en || "Office of Nepal Notary Public"}`,
     url: siteUrl,
     image: ogImageUrl,
     telephone: phoneE164(settings.mobile),
