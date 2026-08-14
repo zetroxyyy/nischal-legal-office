@@ -2,12 +2,13 @@ import type { NextConfig } from "next";
 
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+  script-src 'self' 'unsafe-inline';
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' data: blob: https://*.public.blob.vercel-storage.com https://*.vercel-storage.com;
   font-src 'self' data: https://fonts.gstatic.com;
   frame-src 'self' https://www.google.com https://maps.google.com;
   connect-src 'self' https://*.vercel-storage.com https://*.public.blob.vercel-storage.com;
+  object-src 'none';
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
@@ -25,7 +26,7 @@ const nextConfig: NextConfig = {
       allowedOrigins: [
         "nischallegalservice.com",
         "www.nischallegalservice.com",
-        "*.vercel.app",
+        "nischal-legal-office.vercel.app",
         "localhost:3000",
       ],
       bodySizeLimit: "10mb",

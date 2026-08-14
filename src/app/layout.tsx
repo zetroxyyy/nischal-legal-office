@@ -248,7 +248,7 @@ export default async function RootLayout({
               <span>© {currentYear} {t(settings.siteName, lang)}</span>
               <span>
                 {t(ui.credit, lang)}:{" "}
-                <a href="https://github.com/zetroxyyy" rel="noopener" target="_blank">Zetroxy</a>
+                <a href="https://zetroxy.me/" target="_blank" rel="noopener noreferrer">Zetroxy</a>
               </span>
             </div>
           </div>

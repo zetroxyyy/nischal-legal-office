@@ -35,17 +35,24 @@ export async function submitContactFormAction(formData: FormData) {
     redirect("/contact?err=1#contact-form");
   }
 
-  // 4. Per-IP Rate Limiting (max 5 submissions per hour per hashed IP)
+  // 4. Per-IP Rate Limiting (max 5 submissions per hour per HMAC-hashed IP)
   const headerList = await headers();
   const forwarded = headerList.get("x-forwarded-for");
   const realIp = headerList.get("x-real-ip");
   const clientIp = (forwarded ? forwarded.split(",")[0].trim() : realIp) || "127.0.0.1";
-  const ipHash = crypto.createHash("sha256").update(clientIp).digest("hex");
+  const authSecret = process.env.AUTH_SECRET || "nischal-contact-salt";
+  const ipHash = crypto.createHmac("sha256", authSecret).update(clientIp).digest("hex");
 
   try {
     const sql = getSql();
 
-    // Check recent submission count from this hashed IP in the past 1 hour
+    // Prune entries older than 7 days to keep table compact
+    await sql`
+      DELETE FROM contact_submissions_log
+      WHERE created_at < now() - interval '7 days'
+    `;
+
+    // Check recent submission count from this HMAC-hashed IP in the past 1 hour
     const recentRows = (await sql`
       SELECT COUNT(*)::int AS count
       FROM contact_submissions_log
@@ -55,7 +62,7 @@ export async function submitContactFormAction(formData: FormData) {
 
     const submissionCount = recentRows[0]?.count ?? 0;
     if (submissionCount >= 5) {
-      console.warn(`[contact] Rate limit exceeded for hashed IP: ${ipHash.slice(0, 8)}... (${submissionCount} submissions in last hour)`);
+      console.warn(`[contact] Rate limit exceeded for HMAC IP: ${ipHash.slice(0, 8)}... (${submissionCount} submissions in last hour)`);
       redirect("/contact?err=1#contact-form");
     }
 
