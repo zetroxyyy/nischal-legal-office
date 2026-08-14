@@ -335,7 +335,11 @@
       { "image": "/images/office-front-gate.jpg", "caption": { "ne": "मूल गेटबाट देखिने कार्यालय", "en": "The office from the main gate" } },
       { "image": "/images/location-sketch-map.jpg", "caption": { "ne": "कार्यालयसम्म पुग्ने नक्सा", "en": "Sketch map to the office" } },
       { "image": "/images/business-card.jpg", "caption": { "ne": "कार्यालयको भिजिटिङ कार्ड", "en": "Office visiting card" } },
-      { "image": "/images/advocate-hari-mainali.jpg", "caption": { "ne": "अधिवक्ता हरि ब. मैनाली", "en": "Advocate Hari Bdr. Mainali" } }
+      { "image": "/images/advocate-hari-mainali.jpg", "caption": { "ne": "अधिवक्ता हरि ब. मैनाली", "en": "Advocate Hari Bdr. Mainali" } },
+      { "image": "/images/office-work-area.jpg", "caption": { "ne": "कार्यालयको कार्यकक्ष", "en": "Office work area" } },
+      { "image": "/images/office-entrance-wide.jpg", "caption": { "ne": "कार्यालयको प्रवेशद्वार", "en": "Office entrance" } },
+      { "image": "/images/office-counter-signboard.jpg", "caption": { "ne": "सेवा काउन्टर र कार्यालय बोर्ड", "en": "Service counter and office board" } },
+      { "image": "/images/office-waiting-area.jpg", "caption": { "ne": "सेवाग्राही प्रतीक्षा कक्ष", "en": "Client waiting area" } }
     ]
   },
 

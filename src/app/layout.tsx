@@ -6,6 +6,8 @@ import { getContent } from "@/lib/content";
 import { getLang, t, nd } from "@/lib/lang";
 import { telHref, phoneE164 } from "@/lib/phone";
 
+import HeaderNav from "./components/HeaderNav";
+
 // Allow cookies() (used by getLang) to block prerendering in Next.js 16
 export const instant = false;
 
@@ -176,25 +178,17 @@ export default async function RootLayout({
 
         {/* Main header */}
         <header className="site-header" role="banner">
-          <input type="checkbox" id="hamburger" className="hamburger-check" aria-hidden="true" />
           <div className="container">
-            <div className="site-header__inner">
-              <a href="/" className="wordmark">
-                <span className="wordmark__name">{t(settings.siteName, lang)}</span>
-                <span className="wordmark__sub">{t(settings.siteSub, lang)}</span>
-              </a>
-              <label htmlFor="hamburger" className="hamburger-label">
-                <span className="sr-only">मेनु खोल्नुहोस्</span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </label>
-              <nav className="site-nav" aria-label="मुख्य नेभिगेसन">
-                <a href="/">{t(ui.nav_home, lang)}</a>
-                <a href="/services">{t(ui.nav_services, lang)}</a>
-                <a href="/contact">{t(ui.nav_contact, lang)}</a>
-              </nav>
-            </div>
+            <HeaderNav
+              siteName={t(settings.siteName, lang)}
+              siteSub={t(settings.siteSub, lang)}
+              navLinks={[
+                { href: "/", label: t(ui.nav_home, lang) },
+                { href: "/services", label: t(ui.nav_services, lang) },
+                { href: "/contact", label: t(ui.nav_contact, lang) },
+              ]}
+              openMenuLabel={lang === "ne" ? "मेनु खोल्नुहोस्" : "Open menu"}
+            />
           </div>
         </header>
 
