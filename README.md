@@ -104,13 +104,12 @@ It is critical to distinguish between initial repository content and live produc
   - `/api/health` — Database & system health status check
   - `/api/lang` — Cookie-based language toggle route (`en` / `ne`)
 
-- **Admin Routes (15 routes under `src/app/admin/`)**:
+- **Admin Routes (14 routes under `src/app/admin/`)**:
   - `/admin` — Admin Dashboard Overview
   - `/admin/about` — Firm History & Attorney Profiles Editor
   - `/admin/advanced` — Database Query & Raw JSON Operations
   - `/admin/docs` — Documentation & Guide Viewer
   - `/admin/gallery` — Office & Staff Photo Gallery Manager
-  - `/admin/guide` — Staff CMS User Guide
   - `/admin/hero` — Homepage Hero Banner & Tagline Editor
   - `/admin/labels` — Site-wide UI Labels & Navigation Terms Editor
   - `/admin/login` — Administrative Login Screen

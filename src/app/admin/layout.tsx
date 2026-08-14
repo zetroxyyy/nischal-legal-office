@@ -30,7 +30,6 @@ const NAV_ITEMS = [
   { href: "/admin/messages", labelNe: "सन्देशहरू", labelEn: "Messages" },
   { href: "/admin/advanced", labelNe: "उन्नत / ब्याकअप", labelEn: "Advanced" },
   { href: "/admin/password", labelNe: "पासवर्ड परिवर्तन", labelEn: "Password" },
-  { href: "/admin/guide", labelNe: "प्रयोग गाइड", labelEn: "User Guide" },
 ];
 
 export default async function AdminLayout({
