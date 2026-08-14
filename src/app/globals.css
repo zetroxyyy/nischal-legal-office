@@ -1454,3 +1454,33 @@ h3 { font-size: 1.25rem; font-weight: 600; color: var(--ink); }
     font-size: 0.8125rem;
   }
 }
+
+/* ─── RESPONSIVE MOBILE SPACING (<=767px) ────────────────────────────────── */
+@media (max-width: 767px) {
+  :root {
+    --section-gap: 48px;
+  }
+
+  .page-header {
+    padding-block: 36px 24px;
+  }
+
+  .hero {
+    padding-block: 48px 36px;
+  }
+
+  .services-category-section {
+    margin-bottom: 48px;
+  }
+
+  .contact-form-wrap {
+    margin-top: 32px;
+    padding-top: 28px;
+  }
+
+  .contact-band__grid,
+  .about-grid {
+    gap: 32px;
+  }
+}
+
